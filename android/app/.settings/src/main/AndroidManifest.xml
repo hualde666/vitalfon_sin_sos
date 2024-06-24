@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.piproy.vitalfon">
+    package="com.proy.vitalfon">
    <application
 
         android:label="vitalfon"

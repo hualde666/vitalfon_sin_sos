@@ -122,7 +122,7 @@ class AyudaNuevaPage extends StatelessWidget {
           ),
           ItemConfig(
             icon: Icons.web_sharp,
-            texto: 'www.vitalfon.com',
+            texto: 'www.com.proy.vitalfon',
             onPress: Ayuda(pagina: 'Página Web'),
           ),
           Divider(

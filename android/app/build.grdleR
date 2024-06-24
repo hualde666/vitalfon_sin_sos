@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.piproy.vitalfon"
+        applicationId "com.proy.vitalfon"
        // 4 01 2022 minSdkVersion 21
        // 4 01 2022 targetSdkVersion 30
         minSdkVersion 21

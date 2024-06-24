@@ -49,7 +49,7 @@ if (keystorePropertiesFile.exists()) {
 // }
 android {
    compileSdkVersion = 33
-   namespace "com.piproy.vitalfon"
+   namespace "com.proy.vitalfon"
    compileSdk flutter.compileSdkVersion
    ndkVersion flutter.ndkVersion
 
@@ -70,7 +70,7 @@ android {
     // }
     defaultConfig {
      
-        applicationId = "com.piproy.vitalfon"
+        applicationId = "com.proy.vitalfon"
        // 4 01 2022 minSdkVersion 21
        // 4 01 2022 targetSdkVersion 30
         minSdkVersion 21

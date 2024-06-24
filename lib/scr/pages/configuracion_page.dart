@@ -216,7 +216,7 @@ class ConfiguracionPage extends StatelessWidget {
                     ? Theme.of(context).primaryColor
                     : colorBloqueo,
               ),
-              title: Text('www.vitalfon.com',
+              title: Text('www.com.proy.vitalfon',
                   style: TextStyle(
                     fontSize: 25,
                     color: pref.modoConfig
@@ -225,11 +225,11 @@ class ConfiguracionPage extends StatelessWidget {
                   )),
               onTap: () async {
                 if (pref.modoConfig) {
-                  Uri url = Uri.parse('https://www.vitalfon.com');
+                  Uri url = Uri.parse('https://www.com.proy.vitalfon');
                   await launchUrl(url);
                 }
-                // if (await canLaunchUrlString('https://www.vitalfon.com')) {
-                //   await launchUrlString('https://www.vitalfon.com');
+                // if (await canLaunchUrlString('https://www.com.proy.vitalfon')) {
+                //   await launchUrlString('https://www.com.proy.vitalfon');
                 // }
               } // paginaWep,
               ),
@@ -315,7 +315,7 @@ class ConfiguracionPage extends StatelessWidget {
   }
 
   void correoVitalfon() async {
-    final String toEmail = 'atencion_usuarios@vitalfon.com';
+    final String toEmail = 'atencion_usuarios@com.proy.vitalfon';
     final String asunto = 'Contactando a vitalfon';
     final String contenido = ' ';
     //'Gracias por contactarnos. Nos gustaría leer tus comentarios:   ';
@@ -329,8 +329,8 @@ class ConfiguracionPage extends StatelessWidget {
   }
 
   void paginaWep() async {
-    if (await canLaunchUrlString('https://www.vitalfon.com')) {
-      await launchUrlString('https://www.vitalfon.com');
+    if (await canLaunchUrlString('https://www.com.proy.vitalfon')) {
+      await launchUrlString('https://www.com.proy.vitalfon');
     }
   }
 }

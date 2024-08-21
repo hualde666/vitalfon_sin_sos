@@ -48,7 +48,7 @@ if (keystorePropertiesFile.exists()) {
 //     id("com.android.application")
 // }
 android {
-   compileSdkVersion = 33
+   compileSdkVersion = 34
    namespace "com.proy.vitalfon"
    compileSdk flutter.compileSdkVersion
    ndkVersion flutter.ndkVersion
@@ -74,11 +74,11 @@ android {
        // 4 01 2022 minSdkVersion 21
        // 4 01 2022 targetSdkVersion 30
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         //
         //***  OJO vitaltest  version 23 en google play
         //
-        versionCode = 41
+        versionCode = 46
         
         versionName = "1.0.0"
    // android.defaultConfig.ndk.debugSymbolLevel = 'SYMBOL_TABLE'

@@ -88,7 +88,7 @@ class _SelectContactsPageState extends State<SelectContactsPage> {
           child: Scaffold(
               appBar: PreferredSize(
                   preferredSize:
-                      Size.fromHeight(250.0), // here the desired height
+                      Size.fromHeight(220.0), // here the desired height
                   child: busqueda(context, hayBusqueda)),
               resizeToAvoidBottomInset: false,
               body: FutureBuilder(
@@ -103,9 +103,7 @@ class _SelectContactsPageState extends State<SelectContactsPage> {
                         List<Widget> listaContact = List.generate(
                             snapshot.data.length,
                             (i) => Contacto(
-                                contactoSelec: snapshot.data[i],
-                                apiProvider: apiProvider,
-                                grupo: grupo));
+                                contactoSelec: snapshot.data[i], grupo: grupo));
                         if (listaContact.length == 0) {
                           hayBusqueda = false;
 
@@ -247,12 +245,12 @@ class _SelectContactsPageState extends State<SelectContactsPage> {
 class Contacto extends StatefulWidget {
   const Contacto({
     required this.contactoSelec,
-    required this.apiProvider,
+    // required this.apiProvider,
     required this.grupo,
   });
 
   final ContactoDatos contactoSelec;
-  final AplicacionesProvider apiProvider;
+  //final AplicacionesProvider apiProvider;
   final String grupo;
 
   @override
@@ -263,6 +261,22 @@ class _ContactoState extends State<Contacto> {
   @override
   Widget build(BuildContext context) {
     final pref = Provider.of<Preferencias>(context);
+    final apiProvider = Provider.of<AplicacionesProvider>(context);
+    final _contacto = new ContactoDatos(
+      'nohay',
+      '',
+      '',
+      null,
+      '',
+    );
+    final lista = apiProvider.categoryContact[widget.grupo];
+    final seleccionado = lista!.firstWhere(
+        (element) => element.nombre == widget.contactoSelec.nombre,
+        orElse: () => _contacto);
+    bool estaSeleccionado = true;
+    if (seleccionado.nombre == "nohay") {
+      estaSeleccionado = false;
+    }
     return GestureDetector(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -270,10 +284,11 @@ class _ContactoState extends State<Contacto> {
         width: double.infinity,
         height: 140.0,
         decoration: BoxDecoration(
-            color: widget.apiProvider.categoryContact[widget.grupo]!
-                    .contains(widget.contactoSelec)
-                ? pref.backgroundColor
-                : pref.backgroundColor.withOpacity(0.3), //Colors.grey[700],
+            color:
+                estaSeleccionado //widget.apiProvider.categoryContact[widget.grupo]!
+                    // .contains(widget.contactoSelec)
+                    ? pref.backgroundColor
+                    : pref.backgroundColor.withOpacity(0.3), //Colors.grey[700],
             borderRadius: BorderRadius.circular(60.0),
             border: Border.all(color: Theme.of(context).primaryColor)),
         child: Row(
@@ -292,9 +307,7 @@ class _ContactoState extends State<Contacto> {
                       child: Text(widget.contactoSelec.nombre,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: widget.apiProvider
-                                      .categoryContact[widget.grupo]!
-                                      .contains(widget.contactoSelec)
+                              color: estaSeleccionado
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context)
                                       .primaryColor
@@ -304,9 +317,7 @@ class _ContactoState extends State<Contacto> {
                       child: Text(widget.contactoSelec.telefono,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: widget.apiProvider
-                                      .categoryContact[widget.grupo]!
-                                      .contains(widget.contactoSelec)
+                              color: estaSeleccionado
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context)
                                       .primaryColor
@@ -319,14 +330,14 @@ class _ContactoState extends State<Contacto> {
         ),
       ),
       onTap: () {
-        if (widget.apiProvider.categoryContact[widget.grupo]!
-            .contains(widget.contactoSelec)) {
+        if (estaSeleccionado) {
           //eliminar
           Provider.of<AplicacionesProvider>(context, listen: false)
               .eliminarContacto(widget.grupo, widget.contactoSelec);
 
           DbTiposAplicaciones.db
               .deleteApi(widget.grupo, widget.contactoSelec.nombre);
+          estaSeleccionado = false;
         } else {
           //agregar
 
@@ -337,6 +348,7 @@ class _ContactoState extends State<Contacto> {
               nombre: widget.contactoSelec.nombre,
               tipo: "2");
           DbTiposAplicaciones.db.nuevoTipo(nuevo);
+          estaSeleccionado = true;
         }
         setState(() {});
       },

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/estado_celular.dart';
 import 'package:piproy/scr/providers/provider_pref.dart';
-//import 'package:piproy/scr/widgets/boton_rojo.dart';
+import 'package:piproy/scr/widgets/boton_rojo.dart';
 import 'package:piproy/scr/widgets/configurar.dart';
 import 'package:piproy/scr/widgets/encabezado_icon.dart';
 import 'package:piproy/scr/widgets/fecha.dart';
 import 'package:piproy/scr/widgets/hora.dart';
-import 'package:provider/provider.dart';
 
 encabezadoApp(BuildContext context) {
   final pref = Provider.of<Preferencias>(context);
@@ -37,6 +38,7 @@ class BotonesEncabezado extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     final pref = Provider.of<Preferencias>(context);
     final celProvider = Provider.of<EstadoProvider>(context);
+    final apiProvider = Provider.of<AplicacionesProvider>(context);
 
     return Container(
       child: Row(
@@ -144,7 +146,10 @@ class BotonesEncabezado extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  // botonRojoHeader(context, true),
+                  (apiProvider.vitalfonSOS != null)
+                      ? botonRojoHeader(context, true)
+                      : Container()
+
                   // sin boton rojo NUEVA VERSION
                   // botonRojoHeader(context, false),
                 ],

@@ -19,7 +19,7 @@ PreferredSize headerApp(BuildContext context, String titulo, Widget otroWidget,
         children: [
           //  tresBotonesHeader(context, conrojo, pagina),
           // sin boton rojo
-          tresBotonesHeader(context, false, pagina),
+          tresBotonesHeader(context, true, pagina),
           SizedBox(
             height: 5,
           ),

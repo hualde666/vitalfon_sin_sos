@@ -216,7 +216,7 @@ class ConfiguracionPage extends StatelessWidget {
                     ? Theme.of(context).primaryColor
                     : colorBloqueo,
               ),
-              title: Text('www.com.proy.vitalfon',
+              title: Text('www.vitalfon.com',
                   style: TextStyle(
                     fontSize: 25,
                     color: pref.modoConfig
@@ -225,7 +225,7 @@ class ConfiguracionPage extends StatelessWidget {
                   )),
               onTap: () async {
                 if (pref.modoConfig) {
-                  Uri url = Uri.parse('https://www.com.proy.vitalfon');
+                  Uri url = Uri.parse('https://www.vitalfon.com');
                   await launchUrl(url);
                 }
                 // if (await canLaunchUrlString('https://www.com.proy.vitalfon')) {
@@ -364,7 +364,6 @@ class ItemConfig extends StatelessWidget {
         if (pref.modoConfig) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => onPress));
-          // onPress();
         }
       },
     );

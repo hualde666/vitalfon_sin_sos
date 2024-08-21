@@ -17,7 +17,7 @@ import 'package:piproy/scr/providers/estado_celular.dart';
 import 'package:piproy/scr/providers/provider_pref.dart';
 
 // import 'package:piproy/scr/providers/db_provider.dart';
-º
+
 void main() async {
   await SharedPref().init();
   await AplicacionesProvider().cargarCategorias();

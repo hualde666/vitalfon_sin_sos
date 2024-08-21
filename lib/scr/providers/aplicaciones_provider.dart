@@ -20,15 +20,14 @@ class AplicacionesProvider with ChangeNotifier {
 
   bool _cargando = true;
   String _tipoSeleccion = '';
-
- 
+  late Application? vitalfonSOS;
   // guarda nombres de grupos de api
   List<String> _apigrupos = [
     'Todas',
   ];
   // guarda apis por grupo
   Map<String, List<Application>> categoryApi = {};
-  
+
   // guarda nombres de grupos de contactos
   List<String> _contactgrupos = [
     'Todos',
@@ -410,6 +409,7 @@ class AplicacionesProvider with ChangeNotifier {
     // obtengo lista de api por categorias
 
     if (_cargando) {
+      vitalfonSOS = (await obtenerApi('com.vitalfon.SOS'));
       final resp = await DbTiposAplicaciones.db.getAllRegistros();
 
       if (resp.isNotEmpty) {

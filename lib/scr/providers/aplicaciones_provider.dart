@@ -376,6 +376,8 @@ class AplicacionesProvider with ChangeNotifier {
   }
 
   //******************************* */
+  //*******MENU PRINCIPAL************ */
+  //******************************* */
   // agrega elemnto al menu principal
   agregarMenu(String tipo) {
     if (listaMenu.contains(tipo)) {
@@ -399,7 +401,15 @@ class AplicacionesProvider with ChangeNotifier {
   }
 
   //******************************* */
-  // elimina elemnto al menu principal
+  // ENCONTRAR CONTACO EN menu principal
+  eliminarTipoContacto(String nombre) {
+    listaMenu.remove((element) => element.substring(3) == nombre);
+
+    notifyListeners();
+  }
+
+  //******************************* */
+  // elimina API al menu principal
   eliminar(Application api) {
     categoryApi[_tipoSeleccion]!.remove(api);
     notifyListeners();

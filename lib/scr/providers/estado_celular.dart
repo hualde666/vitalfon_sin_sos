@@ -258,7 +258,7 @@ class EstadoProvider with ChangeNotifier {
     final bateria = await _androidChannel.nivelBateria();
     final _cargando = await _androidChannel.cargandoBateria();
     final _wifi = await _androidChannel.conectadoWifi();
-    // final _wifiConInternet = await _androidChannel.conectadoWifiCon();
+    //final _wifiConInternet = await _androidChannel.conectadoWifiCon();
     final _gps = await _androidChannel.conectadoGps();
     final _datos = await _androidChannel.conectadoDatos();
     if (bateria != _nivelBateria) {

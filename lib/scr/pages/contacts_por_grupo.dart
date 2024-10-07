@@ -75,11 +75,13 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
           ///
           return List.generate(
               lista.length,
-              (i) => (grupo != 'Todos')
-                  ? TarjetaContacto2(context, lista[i], true && pref.modoConfig,
-                      true && pref.modoConfig, 'MPA3 Todas')
-                  : TarjetaContacto2(context, lista[i], true && pref.modoConfig,
-                      false, 'MPA3 Todas'));
+              (i) =>
+                  // (grupo != 'Todos')
+                  //     ?
+                  TarjetaContacto2(context, lista[i], true && pref.modoConfig,
+                      true && pref.modoConfig, 'MPA3 Todas'));
+          // : TarjetaContacto2(context, lista[i], true && pref.modoConfig,
+          //     false, 'MPA3 Todas'));
         }
       }
       return [];
@@ -160,7 +162,7 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
 
     final grupo = apiProvider.tipoSeleccion;
-    final alto = grupo == 'Todos' ? 215.0 : 160.0;
+    final alto = grupo == 'Todos' ? 225.0 : 160.0;
 
     return PreferredSize(
         preferredSize: Size.fromHeight(170.0 + alto),

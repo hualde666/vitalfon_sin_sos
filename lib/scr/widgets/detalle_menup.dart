@@ -206,7 +206,7 @@ Future<List<Widget>> listaContactos(
 Future<List<Widget>> listaContactosWhatsapp(
     BuildContext context, List<String> listaMenu) async {
   //*********************************************************** */
-  /****************** un contacto MPB***************************/
+  /****************** un contacto WHATSAPP MPB***************************/
   //*********************************************************** */
   final contactosProvider =
       Provider.of<ContactosProvider>(context, listen: false);

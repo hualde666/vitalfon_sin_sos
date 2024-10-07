@@ -48,39 +48,28 @@ if (keystorePropertiesFile.exists()) {
 //     id("com.android.application")
 // }
 android {
-   compileSdkVersion = 34
+   compileSdkVersion  34
    namespace "com.proy.vitalfon"
-   compileSdk flutter.compileSdkVersion
-   ndkVersion flutter.ndkVersion
+// 08/09/2024   compileSdk flutter.compileSdkVersion
+//  08/09/2024  ndkVersion flutter.ndkVersion
 
-    // sourceSets {
-    //     main.java.srcDirs += 'src/main/kotlin'
-    // }
+  
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    //   sourceCompatibility 1.8
-    //   targetCompatibility 1.8
+   
     }
-    // kotlinOptions {
-    //     jvmTarget = '1.8'
-    // }
-    // sourceSets {
-    //     main.java.srcDirs += 'src/main/kotlin'
-    // }
+
     defaultConfig {
      
         applicationId = "com.proy.vitalfon"
-       // 4 01 2022 minSdkVersion 21
-       // 4 01 2022 targetSdkVersion 30
+ 
         minSdkVersion 21
         targetSdkVersion 34
-        //
-        //***  OJO vitaltest  version 23 en google play
-        //
-        versionCode = 46
+       
+        versionCode = 50
         
-        versionName = "1.0.0"
+        versionName = "1.0.1"
    // android.defaultConfig.ndk.debugSymbolLevel = 'SYMBOL_TABLE'
 
         
@@ -113,7 +102,7 @@ flutter {
 dependencies {
     
 
-   implementation 'com.google.android.gms:play-services-location:21.0.1'
+   implementation 'com.google.android.gms:play-services-location:21.3.0'
  
 
 

@@ -3,8 +3,10 @@ import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/db_provider.dart';
 import 'package:provider/provider.dart';
 
-Future<dynamic> eliminarContactoMP(BuildContext context, String tipo) {
-  final String titulo = tipo.substring(3);
+Future<dynamic> eliminarContactoMP(
+    BuildContext context, String tipo, String nombre) {
+  final String titulo = nombre;
+
   return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -24,12 +26,13 @@ Future<dynamic> eliminarContactoMP(BuildContext context, String tipo) {
                 height: 50,
                 child: ElevatedButton(
                     onPressed: () {
-                      /// elina api de pantalla
+                      /// elimina contacto de pantalla
+
                       Provider.of<AplicacionesProvider>(context, listen: false)
                           .eliminarTipoMP(tipo);
 
                       DbTiposAplicaciones.db
-                          .deleteApi(tipo.substring(0, 3), tipo.substring(3));
+                          .deleteApi(tipo.substring(0, 3), nombre);
 
                       //elimina api de BD
 

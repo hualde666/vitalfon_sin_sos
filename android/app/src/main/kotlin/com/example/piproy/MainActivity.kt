@@ -116,9 +116,9 @@ class MainActivity : FlutterActivity() {
 //                "linterna" -> {
 //                    return prendeLinterna(prender)
 //                }
-            // "gps" -> {
-            //     return getGps()
-            // }
+            "gps" -> {
+                return getGps()
+            }
             "datos" -> {
                 return getDatos()
             }

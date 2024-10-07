@@ -117,7 +117,6 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
                 llamar(_contacto.telefono);
               }
             }
-            /* llamar por telefono*/
           } else if (widget.tipo == 'MPB') {
             // ** ir a contacto Whastappp
             final ContactoDatos _contacto = await contactosProvaider
@@ -135,7 +134,7 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
 Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
     String grupo, bool envio, bool eliminar, String tipo) {
   final pref = Provider.of<Preferencias>(context);
-
+  final apiProvider = Provider.of<AplicacionesProvider>(context);
   return Container(
     padding: EdgeInsets.only(left: 10, right: 10),
     height: 42,
@@ -165,14 +164,17 @@ Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
             : Container(),
         GestureDetector(
             onTap: () {
-              if (envio) {
-                if (grupo != 'Todos') {
-                  eliminarContactoGrupo(context, grupo, contacto);
-                }
+              // if (envio) {
+              if (grupo != 'Todos') {
+                eliminarContactoGrupo(context, grupo, contacto);
+                // }
                 // eliminar contacto del grupo
               } else {
                 // eliminar contacto menu principal
-                eliminarContactoMP(context, tipo + contacto.nombre);
+
+                final tipo = apiProvider.listaMenu.firstWhere(
+                    (element) => element.substring(3) == contacto.nombre);
+                eliminarContactoMP(context, tipo, contacto.nombre);
               }
             },
             child: eliminar && pref.modoConfig

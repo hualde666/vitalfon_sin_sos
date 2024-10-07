@@ -25,6 +25,7 @@ Future<dynamic> agregarMPA(BuildContext context, ContactoDatos contacto) async {
       actionsAlignment: MainAxisAlignment.spaceAround,
       actionsOverflowDirection: VerticalDirection.down,
       actions: [
+        //***  CONTACTO DISCADO RAPIDO */
         ElevatedButton(
             onPressed: () {
               final grupo = 'MPA';
@@ -45,6 +46,7 @@ Future<dynamic> agregarMPA(BuildContext context, ContactoDatos contacto) async {
                 ),
               ),
             )),
+        //***  CONTACTO DISCADO WHATSAPP */
         ElevatedButton(
             onPressed: () {
               final grupo = 'MPB';
@@ -67,6 +69,7 @@ Future<dynamic> agregarMPA(BuildContext context, ContactoDatos contacto) async {
                 ),
               ),
             )),
+        //***  CONTACTO DISCADO RAPIDO  Y WHATSAPP*/
         ElevatedButton(
             onPressed: () {
               final grupo = 'MPC';

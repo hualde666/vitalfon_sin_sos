@@ -13,6 +13,9 @@ import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import '../providers/provider_pref.dart';
 
 class ContactsGruposPage extends StatelessWidget {
+  ContactsGruposPage({required this.configurar});
+
+  final bool configurar;
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
@@ -30,11 +33,11 @@ class ContactsGruposPage extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 100),
             itemCount: listaGrupos.length,
             itemBuilder: (context, i) {
-              return grupo(context, listaGrupos[i]);
+              return grupo(context, listaGrupos[i], configurar);
             }),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: pref.modoConfig
+      floatingActionButton: configurar
           ? FloatingActionButton.extended(
               heroTag: "agregar",
               icon: Icon(
@@ -51,10 +54,7 @@ class ContactsGruposPage extends StatelessWidget {
     ));
   }
 
-  Widget grupo(
-    BuildContext context,
-    String grupo,
-  ) {
+  Widget grupo(BuildContext context, String grupo, bool configurar) {
     double width = MediaQuery.of(context).size.width;
     // double height = MediaQuery.of(context).size.height;
     double ancho = 240;
@@ -67,7 +67,7 @@ class ContactsGruposPage extends StatelessWidget {
         onLongPress: () {
           /// Cambiar nombre de grupo de contacto
           ///
-          if (grupo != 'Todos' && pref.modoConfig) {
+          if (grupo != 'Todos' && configurar) {
             editarTipo(context, grupo);
           }
         },
@@ -78,7 +78,7 @@ class ContactsGruposPage extends StatelessWidget {
               color: pref.backgroundColor,
               borderRadius: BorderRadius.circular(60.0),
               border: Border.all(color: Theme.of(context).primaryColor)),
-          child: grupo != 'Todos' && pref.modoConfig
+          child: grupo != 'Todos' && configurar
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -108,7 +108,8 @@ class ContactsGruposPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ContactsPorGrupoPage()),
+                                builder: (context) => ContactsPorGrupoPage(
+                                    configurar: configurar)),
                           );
                         },
                         child: Container(
@@ -149,7 +150,9 @@ class ContactsGruposPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ContactsPorGrupoPage()),
+                          builder: (context) => ContactsPorGrupoPage(
+                                configurar: configurar,
+                              )),
                     );
                     // : Navigator.push(
                     //     context,

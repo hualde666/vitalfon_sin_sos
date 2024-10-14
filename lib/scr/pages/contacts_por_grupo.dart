@@ -13,6 +13,12 @@ import 'package:provider/provider.dart';
 import '../providers/provider_pref.dart';
 
 class ContactsPorGrupoPage extends StatefulWidget {
+  ContactsPorGrupoPage({
+    required this.configurar,
+  });
+
+  final bool configurar;
+
   @override
   State<ContactsPorGrupoPage> createState() => _ContactsPorGrupoPageState();
 }
@@ -63,7 +69,7 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
         return List.generate(
             listaContactosFiltro.length,
             (i) => TarjetaContacto2(
-                context, listaContactosFiltro[i], true, false, 'MPA3 Todas'));
+                context, listaContactosFiltro[i], true, true, 'MPA3 Todas'));
       } else {
         List<ContactoDatos> lista =
             await apiProvider.obtenerListaContactosGrupo(context, grupo);
@@ -79,7 +85,7 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
                   // (grupo != 'Todos')
                   //     ?
                   TarjetaContacto2(context, lista[i], true && pref.modoConfig,
-                      true && pref.modoConfig, 'MPA3 Todas'));
+                      true && widget.configurar, 'MPA3 Todas'));
           // : TarjetaContacto2(context, lista[i], true && pref.modoConfig,
           //     false, 'MPA3 Todas'));
         }
@@ -135,7 +141,7 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
           }),
       //  resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: (grupo != 'Todos' && pref.modoConfig)
+      floatingActionButton: (grupo != 'Todos' && widget.configurar)
           ?
           // BotonFlotante(pagina: 'grupoContact'),
           FloatingActionButton.extended(

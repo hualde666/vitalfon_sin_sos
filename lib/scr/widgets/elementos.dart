@@ -11,12 +11,13 @@ import '../pages/conta_grupos.dart';
 import '../providers/provider_pref.dart';
 
 Widget elementos(BuildContext context, Widget widget, double altura,
-    String ruta, String tipo) {
+    String ruta, String tipo, bool configurar) {
   bool eliminable = tipo != '' ? true : false;
   final pref = Provider.of<Preferencias>(context, listen: false);
   return GestureDetector(
     child: Container(
-      height: 92, //altura,
+      height: 90, // altura,
+      //color: Colors.green,
       margin: EdgeInsets.symmetric(horizontal: 5),
       alignment: Alignment.center,
       child: eliminable
@@ -30,7 +31,7 @@ Widget elementos(BuildContext context, Widget widget, double altura,
                   onTap: () {
                     eliminarApi(context, tipo);
                   },
-                  child: pref.modoConfig
+                  child: configurar
                       ? Container(
                           width: 50,
                           height: 90,
@@ -56,15 +57,18 @@ Widget elementos(BuildContext context, Widget widget, double altura,
           border: Border.all(color: Theme.of(context).primaryColor)),
     ),
     onTap: () {
-      if (ruta != '') {
+      if (ruta != '' && !configurar) {
         Provider.of<AplicacionesProvider>(context, listen: false)
             .tipoSeleccion = ruta;
 
         if (tipo.contains('MPF')) {
           //**** grupo de apps */
 
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ApiPorGrupoPage()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ApiPorGrupoPage(configurar: configurar)));
         } else {
           if (tipo.contains('MPE')) {
             //**** grupo de contacto */
@@ -77,7 +81,10 @@ Widget elementos(BuildContext context, Widget widget, double altura,
             //     ?
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ContactsPorGrupoPage()),
+              MaterialPageRoute(
+                  builder: (context) => ContactsPorGrupoPage(
+                        configurar: configurar,
+                      )),
             );
             //     :
             // Navigator.push(
@@ -89,9 +96,13 @@ Widget elementos(BuildContext context, Widget widget, double altura,
                 ? Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ContactsGruposPage()))
-                : Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ApiGruposPage()));
+                        builder: (context) =>
+                            ContactsGruposPage(configurar: false)))
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ApiGruposPage(configurar: configurar)));
           }
         }
       }

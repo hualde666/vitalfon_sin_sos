@@ -78,7 +78,7 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          pref.modoConfig
+                          pref.modoConfig && widget.eliminar
                               ? _configurarContacto(
                                   context,
                                   widget.contacto,
@@ -164,18 +164,21 @@ Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
             : Container(),
         GestureDetector(
             onTap: () {
-              // if (envio) {
-              if (grupo != 'Todos') {
-                eliminarContactoGrupo(context, grupo, contacto);
-                // }
-                // eliminar contacto del grupo
-              } else {
+              if (tipo == 'MPA' || tipo == 'MPB' || tipo == 'MPC') {
                 // eliminar contacto menu principal
 
-                final tipo = apiProvider.listaMenu.firstWhere(
-                    (element) => element.substring(3) == contacto.nombre);
-                eliminarContactoMP(context, tipo, contacto.nombre);
+                eliminarContactoMP(
+                    context, tipo + contacto.nombre, contacto.nombre);
+              } else {
+                // eliminar contacto del grupo
+                eliminarContactoGrupo(context, grupo, contacto);
               }
+              //  else {
+
+              //   final tipo = apiProvider.listaMenu.firstWhere(
+              //       (element) => element.substring(3) == contacto.nombre);
+              //   eliminarContactoMP(context, tipo, contacto.nombre);
+              // }
             },
             child: eliminar && pref.modoConfig
                 ? Container(

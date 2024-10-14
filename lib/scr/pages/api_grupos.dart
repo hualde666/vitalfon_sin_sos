@@ -14,6 +14,11 @@ import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import '../providers/provider_pref.dart';
 
 class ApiGruposPage extends StatelessWidget {
+  ApiGruposPage({
+    required this.configurar,
+  });
+
+  final bool configurar;
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
@@ -31,12 +36,12 @@ class ApiGruposPage extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 65),
             itemCount: listaGrupos.length,
             itemBuilder: (context, i) {
-              return grupo(context, listaGrupos[i]);
+              return grupo(context, listaGrupos[i], configurar);
             }),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: pref.modoConfig
+      floatingActionButton: configurar
           ?
           //BotonFlotante(pagina: 'grupoApi'),
           FloatingActionButton.extended(
@@ -56,10 +61,7 @@ class ApiGruposPage extends StatelessWidget {
     ));
   }
 
-  Widget grupo(
-    BuildContext context,
-    String grupo,
-  ) {
+  Widget grupo(BuildContext context, String grupo, bool configurar) {
     double width = MediaQuery.of(context).size.width;
     // double height = MediaQuery.of(context).size.height;
     double ancho = 250;
@@ -69,7 +71,7 @@ class ApiGruposPage extends StatelessWidget {
     }
     return GestureDetector(
       onLongPress: () {
-        if (grupo != 'Todas' && pref.modoConfig) {
+        if (grupo != 'Todas' && configurar) {
           editarTipo(context, grupo);
         }
       },
@@ -89,7 +91,7 @@ class ApiGruposPage extends StatelessWidget {
                     agregaMPD(context, grupo);
                   }
                 },
-                child: grupo != 'Todas' && pref.modoConfig
+                child: grupo != 'Todas' && pref.modoConfig && configurar
                     ? Container(
                         width: 50,
                         height: 90,
@@ -111,7 +113,8 @@ class ApiGruposPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ApiPorGrupoPage()));
+                          builder: (context) =>
+                              ApiPorGrupoPage(configurar: configurar)));
                 },
                 child: Container(
                   width: ancho,
@@ -132,7 +135,7 @@ class ApiGruposPage extends StatelessWidget {
                     eliminarTipo(context, grupo);
                   }
                 },
-                child: grupo != 'Todas' && pref.modoConfig
+                child: grupo != 'Todas' && configurar
                     ? Container(
                         width: 50,
                         height: 90,

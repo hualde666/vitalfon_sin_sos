@@ -88,7 +88,7 @@ class _SelectContactsPageState extends State<SelectContactsPage> {
           child: Scaffold(
               appBar: PreferredSize(
                   preferredSize:
-                      Size.fromHeight(220.0), // here the desired height
+                      Size.fromHeight(230.0), // here the desired height
                   child: busqueda(context, hayBusqueda)),
               resizeToAvoidBottomInset: false,
               body: FutureBuilder(

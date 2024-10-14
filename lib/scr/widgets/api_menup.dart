@@ -5,60 +5,61 @@ import 'package:piproy/scr/providers/db_provider.dart';
 import 'package:piproy/scr/providers/provider_pref.dart';
 import 'package:provider/provider.dart';
 
-Widget elementoApi2(BuildContext context, Application api) {
+Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
   final pref = Provider.of<Preferencias>(context, listen: false);
 
   return GestureDetector(
     onTap: () {
-      if (api.packageName != "") {
+      if (api.packageName != "" && !eliminar) {
         api.openApp();
       }
     },
-    child: Container(
-      // height: 220,
-      // color: Colors.white24,
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () {
-              eliminarApiMP(context, 'MPD' + api.packageName, api.appName);
-            },
-            child: pref.modoConfig
-                ? Container(
-                    // pureba tamaño area tactil antes 30x30
-                    width: 50,
-                    height: 50,
-                    // color: Colors.yellow,
-                    child: Center(
-                      child: Icon(
-                        Icons.close,
-                        size: 40,
-                        color: Colors.red,
-                      ),
-                    ))
-                : Container(),
-          ),
-          Image.memory(
-            (api as ApplicationWithIcon).icon,
-            width: pref.modoConfig ? 80 : 120,
-          ),
-          Container(
-            // height: 40,
-            width: 130,
-            // color: Colors.pink,
-            child: Text(
-              api.appName,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 30,
-              ),
+    // child: Container(
+    //   height: 100,
+    //   // color: Colors.white24,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            eliminarApiMP(context, 'MPD' + api.packageName, api.appName);
+          },
+          child: eliminar
+              ? Container(
+                  // pureba tamaño area tactil antes 30x30
+                  width: 50,
+                  height: 50,
+                  // color: Colors.yellow,
+                  child: Center(
+                    child: Icon(
+                      Icons.close,
+                      size: 40,
+                      color: Colors.red,
+                    ),
+                  ))
+              : Container(),
+        ),
+        Image.memory(
+          (api as ApplicationWithIcon).icon,
+          width: eliminar ? 80 : 120,
+        ),
+        Container(
+          // height: 40,
+          width: 130,
+          // color: Colors.pink,
+          child: Text(
+            api.appName,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 30,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
+    //  ),
   );
 }
 

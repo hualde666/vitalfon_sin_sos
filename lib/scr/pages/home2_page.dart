@@ -32,7 +32,7 @@ class _Home2PageState extends State<Home2Page> {
           child: encabezadoApp(context),
         ),
         body: FutureBuilder(
-            future: detalle(context),
+            future: detalle(context, false),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(

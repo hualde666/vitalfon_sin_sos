@@ -11,6 +11,11 @@ import 'package:provider/provider.dart';
 import '../providers/provider_pref.dart';
 
 class ApiPorGrupoPage extends StatelessWidget {
+  ApiPorGrupoPage({
+    required this.configurar,
+  });
+
+  final bool configurar;
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
@@ -20,8 +25,8 @@ class ApiPorGrupoPage extends StatelessWidget {
       List<Application> lista = await apiProvider.obtenerListaApiGrupo(grupo);
 
       if (lista != []) {
-        List<Widget> listaApi =
-            List.generate(lista.length, (i) => ElementoApi(api: lista[i]));
+        List<Widget> listaApi = List.generate(lista.length,
+            (i) => ElementoApi(api: lista[i], configurar: configurar));
 
         return listaApi;
       }
@@ -59,7 +64,7 @@ class ApiPorGrupoPage extends StatelessWidget {
           }),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: grupo != 'Todas' && pref.modoConfig
+      floatingActionButton: grupo != 'Todas' && configurar
           ?
           // BotonFlotante(pagina: 'tipoApi'),
           FloatingActionButton.extended(
@@ -89,8 +94,9 @@ class ApiPorGrupoPage extends StatelessWidget {
 }
 
 class ElementoApi extends StatelessWidget {
-  const ElementoApi({required this.api});
+  ElementoApi({required this.api, required this.configurar});
   final Application api;
+  final bool configurar;
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
@@ -110,7 +116,7 @@ class ElementoApi extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            pref.modoConfig
+            configurar
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -144,7 +150,7 @@ class ElementoApi extends StatelessWidget {
                             eliminarApi(context, grupo);
                           }
                         },
-                        child: grupo != 'Todas' && pref.modoConfig
+                        child: grupo != 'Todas' && configurar
                             ? Container(
                                 width: 50,
                                 height: 50,

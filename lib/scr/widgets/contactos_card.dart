@@ -103,26 +103,28 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
             ],
           )),
       onTap: () async {
-        if (widget.tipo != 'MPA' && widget.tipo != 'MPB') {
-          oneTap = !oneTap;
-          setState(() {});
-        } else {
-          if (widget.tipo == 'MPA') {
-            if (activoDatos) {
+        if (!widget.eliminar) {
+          if (widget.tipo != 'MPA' && widget.tipo != 'MPB') {
+            oneTap = !oneTap;
+            setState(() {});
+          } else {
+            if (widget.tipo == 'MPA') {
+              if (activoDatos) {
+                final ContactoDatos _contacto = await contactosProvaider
+                    .obtenerContacto(widget.contacto.nombre);
+
+                /// *** llamada desde el contacto
+                if (_contacto.telefono != '') {
+                  llamar(_contacto.telefono);
+                }
+              }
+            } else if (widget.tipo == 'MPB') {
+              // ** ir a contacto Whastappp
               final ContactoDatos _contacto = await contactosProvaider
                   .obtenerContacto(widget.contacto.nombre);
-
-              /// *** llamada desde el contacto
-              if (_contacto.telefono != '') {
-                llamar(_contacto.telefono);
+              if (_contacto.telefono != "") {
+                abrirWhatsapp(_contacto.telefono, '');
               }
-            }
-          } else if (widget.tipo == 'MPB') {
-            // ** ir a contacto Whastappp
-            final ContactoDatos _contacto = await contactosProvaider
-                .obtenerContacto(widget.contacto.nombre);
-            if (_contacto.telefono != "") {
-              abrirWhatsapp(_contacto.telefono, '');
             }
           }
         }
@@ -134,11 +136,10 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
 Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
     String grupo, bool envio, bool eliminar, String tipo) {
   final pref = Provider.of<Preferencias>(context);
-  final apiProvider = Provider.of<AplicacionesProvider>(context);
+
   return Container(
     padding: EdgeInsets.only(left: 10, right: 10),
     height: 42,
-    // color: Colors.amber,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -173,12 +174,6 @@ Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
                 // eliminar contacto del grupo
                 eliminarContactoGrupo(context, grupo, contacto);
               }
-              //  else {
-
-              //   final tipo = apiProvider.listaMenu.firstWhere(
-              //       (element) => element.substring(3) == contacto.nombre);
-              //   eliminarContactoMP(context, tipo, contacto.nombre);
-              // }
             },
             child: eliminar && pref.modoConfig
                 ? Container(

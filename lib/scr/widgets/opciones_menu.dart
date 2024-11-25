@@ -3,7 +3,7 @@ import 'package:piproy/scr/providers/provider_pref.dart';
 import 'package:piproy/scr/sharedpreferences/usuario_pref.dart';
 import 'package:provider/provider.dart';
 
-Widget listaOpciones2(BuildContext context, int i) {
+List<Widget> listaOpciones2(BuildContext context) {
   final pref = Provider.of<Preferencias>(context);
 
   double padding = (MediaQuery.of(context).size.width - 280) / 2 > 0
@@ -91,7 +91,7 @@ Widget listaOpciones2(BuildContext context, int i) {
       ),
     ),
   ];
-  return opciones[i];
+  return opciones;
 }
 
 class IconOpcion extends StatelessWidget {

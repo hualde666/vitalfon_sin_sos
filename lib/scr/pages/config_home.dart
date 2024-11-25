@@ -6,7 +6,12 @@ import 'package:piproy/scr/widgets/header_app.dart';
 //import 'package:piproy/scr/widgets/header_botones.dart';
 import 'package:piproy/scr/widgets/vitalfon_fondo.dart';
 
-class ConfigHomePage extends StatelessWidget {
+class ConfigHomePage extends StatefulWidget {
+  @override
+  State<ConfigHomePage> createState() => _ConfigHomePageState();
+}
+
+class _ConfigHomePageState extends State<ConfigHomePage> {
   @override
   Widget build(BuildContext context) {
     // final lista = apiProvider.listaMenu;

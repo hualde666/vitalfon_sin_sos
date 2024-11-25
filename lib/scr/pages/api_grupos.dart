@@ -23,7 +23,7 @@ class ApiGruposPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     final List<String> listaGrupos = apiProvider.apigrupos;
-    final pref = Provider.of<Preferencias>(context);
+
     return SafeArea(
         child: Scaffold(
       appBar: headerApp(

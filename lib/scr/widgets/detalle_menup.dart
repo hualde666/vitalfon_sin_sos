@@ -20,8 +20,7 @@ Future<List<Widget>> detalle(BuildContext context, bool configurar) async {
   final listaMenu = apiProvider.listaCategoria;
   List<Widget> listaOpciones = [];
   if (configurar) {
-    listaOpciones.add(listaOpciones2(context, 0));
-    listaOpciones.add(listaOpciones2(context, 1));
+    listaOpciones.addAll(listaOpciones2(context));
   }
   if (pref.iGoogle && !configurar) {
     final Application? apiGoogle =
@@ -54,20 +53,7 @@ Future<List<Widget>> detalle(BuildContext context, bool configurar) async {
           child: OpcionOnOff(texto: 'Contactos', onoff: pref.iContactos)),
     ));
 
-    listaOpciones.add(Container(
-      height: 90,
-      // color: Colors.amber,
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      child: GestureDetector(
-          onTap: () {
-            SharedPref().iAplicaciones = !pref.iAplicaciones;
-            pref.iAplicaciones = !pref.iAplicaciones;
-          },
-          child: OpcionOnOff(
-            texto: 'Aplicaciones',
-            onoff: pref.iAplicaciones,
-          )),
-    ));
+    listaOpciones.add(AppConfig());
   }
   if (pref.iContactos && !configurar) {
     listaOpciones.add(elementos(
@@ -104,6 +90,27 @@ Future<List<Widget>> detalle(BuildContext context, bool configurar) async {
   }
 
   return listaOpciones;
+}
+
+class AppConfig extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final pref = Provider.of<Preferencias>(context);
+    return Container(
+      height: 90,
+      // color: Colors.amber,
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      child: GestureDetector(
+          onTap: () {
+            SharedPref().iAplicaciones = !pref.iAplicaciones;
+            pref.iAplicaciones = !pref.iAplicaciones;
+          },
+          child: OpcionOnOff(
+            texto: 'Aplicaciones',
+            onoff: pref.iAplicaciones,
+          )),
+    );
+  }
 }
 
 Iterable<Widget> listaGrupos(
@@ -202,7 +209,7 @@ Future<Widget> matrizApis(
 Future<List<Widget>> listaContactosLlamadas(
     BuildContext context, List<String> listaMenu, bool configurar) async {
   //*********************************************************** */
-  /****************** un contacto MPA***************************/
+  //****************** un contacto MPA***************************/
   //*********************************************************** */
   final contactosProvider =
       Provider.of<ContactosProvider>(context, listen: false);

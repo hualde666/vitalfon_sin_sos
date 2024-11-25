@@ -33,7 +33,6 @@ class ApiPorGrupoPage extends StatelessWidget {
       return [];
     }
 
-    final pref = Provider.of<Preferencias>(context);
     return SafeArea(
         child: Scaffold(
       //  backgroundColor: Theme.of(context).primaryColor,
@@ -113,9 +112,9 @@ class ElementoApi extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 5,
-            ),
+            // SizedBox(
+            //   height: 5,
+            // ),
             configurar
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +167,7 @@ class ElementoApi extends StatelessWidget {
                 : Container(),
             Image.memory(
               (api as ApplicationWithIcon).icon,
-              width: 120,
+              width: configurar ? 100 : 120,
             ),
             SizedBox(
               height: 2,

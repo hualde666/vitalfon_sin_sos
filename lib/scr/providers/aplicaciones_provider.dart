@@ -9,6 +9,7 @@ import 'package:piproy/scr/providers/contactos_provider.dart';
 
 import 'package:piproy/scr/providers/db_provider.dart';
 import 'package:piproy/scr/models/api_tipos.dart';
+import 'package:piproy/scr/widgets/detalle_menup.dart';
 import 'package:provider/provider.dart';
 
 class AplicacionesProvider with ChangeNotifier {
@@ -44,6 +45,11 @@ class AplicacionesProvider with ChangeNotifier {
 
     /// cargarCategorias();
   }
+  List<Widget> MenuPrincipal = [
+    Text('uno'),
+    Text('dos'),
+    Text('tres'),
+  ];
   inicializar() {
     _apigrupos = [
       'Todas',
@@ -60,7 +66,8 @@ class AplicacionesProvider with ChangeNotifier {
     // categoryContact['Emergencia'] = [];
     notifyListeners();
   }
-//***********************************Widgets del menu principal */
+
+//***********************************elementos  del menu principal */
 
   agregarApiGrupo(String grupo) {
     _apigrupos.add(grupo);

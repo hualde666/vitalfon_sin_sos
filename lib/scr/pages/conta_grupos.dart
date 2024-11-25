@@ -20,7 +20,7 @@ class ContactsGruposPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     final List<String> listaGrupos = apiProvider.contactgrupos;
-    final pref = Provider.of<Preferencias>(context);
+
     return SafeArea(
         child: Scaffold(
       appBar: headerApp(context, 'Grupos de Contactos', Text(''), 0.0, true,

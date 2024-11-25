@@ -1,13 +1,11 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+import 'package:device_apps/device_apps.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/db_provider.dart';
-import 'package:piproy/scr/providers/provider_pref.dart';
+
 import 'package:provider/provider.dart';
 
 Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
-  final pref = Provider.of<Preferencias>(context, listen: false);
-
   return GestureDetector(
     onTap: () {
       if (api.packageName != "" && !eliminar) {

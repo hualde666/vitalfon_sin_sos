@@ -177,7 +177,9 @@ class _ContactoState extends State<Contacto> {
                     color:
                         widget.contactoSelec.telefono == pref.telefonoEmergencia
                             ? Theme.of(context).primaryColor
-                            : Theme.of(context).primaryColor.withOpacity(0.3),
+                            : Theme.of(context)
+                                .primaryColor
+                                .withOpacity(0.3), //withValues(red: 0.3),
                     fontSize: 30))),
       ),
       onTap: () {

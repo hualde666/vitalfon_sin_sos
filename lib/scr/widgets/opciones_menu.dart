@@ -82,12 +82,10 @@ List<Widget> listaOpciones2(BuildContext context) {
       height: 60,
       child: GestureDetector(
         onTap: () {
-          SharedPref().iGoogle = !pref.iGoogle;
+          SharedPref().iGoogle = !SharedPref().iGoogle;
           pref.iGoogle = !pref.iGoogle;
         },
-        child: GoogleOpcion(
-          onoff: pref.iGoogle,
-        ),
+        child: GoogleOpcion(),
       ),
     ),
   ];
@@ -147,18 +145,17 @@ class IconOpcion extends StatelessWidget {
 }
 
 class GoogleOpcion extends StatelessWidget {
-  GoogleOpcion({
-    super.key,
-    required this.onoff,
-  });
-  final bool onoff;
+  // final BuildContext context;
+
+  // const GoogleOpcion({super.key, required this.context});
   @override
   Widget build(BuildContext context) {
+    final pref = Provider.of<Preferencias>(context);
     return Container(
       height: 40,
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
       decoration: BoxDecoration(
-          color: onoff
+          color: SharedPref().iGoogle
               ? Colors.white
               : Theme.of(context).primaryColor.withOpacity(0.4),
           borderRadius: BorderRadius.circular(60.0),
@@ -172,7 +169,7 @@ class GoogleOpcion extends StatelessWidget {
           ),
           Container(
             child: Center(
-                child: onoff
+                child: pref.iGoogle
                     ? Image(
                         image: AssetImage('assets/google.png'),
                         fit: BoxFit.fill)

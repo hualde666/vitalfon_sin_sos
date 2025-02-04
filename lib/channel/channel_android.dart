@@ -22,16 +22,16 @@ class AndroidChannel {
     }
   }
 
-  // Future<void> listaApis() async {
-  //   print('Entre a listaApis');
-  //   try {
-  //     final result = await _methodChannel.invokeMethod("aplicaciones");
-  //     print('Respuesta : $result');
-  //     return result;
-  //   } catch (e) {
-  //     print('ERROR: $e');
-  //   }
-  // }
+  Future<void> listaApis() async {
+    print('Entre a listaApis');
+    try {
+      final result = await _methodChannel.invokeMethod("aplicaciones");
+      print('Respuesta : $result');
+      return result;
+    } catch (e) {
+      print('ERROR: $e');
+    }
+  }
 
   Future<int> nivelBateria() async {
     try {
@@ -166,15 +166,13 @@ class AndroidChannel {
     final bool autorizado = await _methodChannel.invokeMethod("permisosms", '');
 
     return autorizado;
-
-
   }
+
   Future<bool> tengoPermisoSms() async {
     // verifico si tengo permiso
-    final bool autorizado = await _methodChannel.invokeMethod("tengopermisosms", '');
+    final bool autorizado =
+        await _methodChannel.invokeMethod("tengopermisosms", '');
     print('tengo permiso?======: $autorizado');
     return autorizado;
-
-
   }
 }

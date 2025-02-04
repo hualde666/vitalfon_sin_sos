@@ -9,7 +9,7 @@ import 'package:piproy/scr/providers/contactos_provider.dart';
 
 import 'package:piproy/scr/providers/db_provider.dart';
 import 'package:piproy/scr/models/api_tipos.dart';
-import 'package:piproy/scr/widgets/detalle_menup.dart';
+//import 'package:piproy/scr/widgets/detalle_menup.dart';
 import 'package:provider/provider.dart';
 
 class AplicacionesProvider with ChangeNotifier {

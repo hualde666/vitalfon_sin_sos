@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+//import 'package:piproy/channel/channel_android.dart';
 import 'package:piproy/scr/sharedpreferences/usuario_pref.dart';
 
 import 'package:provider/provider.dart';
@@ -21,7 +22,8 @@ import 'package:piproy/scr/providers/provider_pref.dart';
 void main() async {
   await SharedPref().init();
   await AplicacionesProvider().cargarCategorias();
-
+  // AndroidChannel _androidChannel = AndroidChannel();
+  //final listaApps = await _androidChannel.listaApis();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => new Preferencias()),

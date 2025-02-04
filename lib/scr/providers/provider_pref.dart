@@ -22,6 +22,10 @@ class Preferencias extends ChangeNotifier {
   static bool _iReloj = SharedPref().iReloj;
   static bool _iMensaje = SharedPref().iMensaje;
   static bool _menuHorizontal = SharedPref().menuHorizontal;
+  static String _password = SharedPref().password;
+  static String _pregunta = SharedPref().pregunta;
+  static String _respuesta = SharedPref().respuesta;
+
   static String _paleta = SharedPref().paleta;
   static String _telefonoEmergencia = SharedPref().telefonoEmergencia;
   //static bool _instalado = SharedPref().instalado;
@@ -55,6 +59,9 @@ class Preferencias extends ChangeNotifier {
     _menuHorizontal = true;
     paleta = "2";
     telefonoEmergencia = "";
+    password = "";
+    pregunta = "";
+    respuesta = "";
 
     ///instalado = false;
     modoConfig = true;
@@ -152,6 +159,24 @@ class Preferencias extends ChangeNotifier {
 
   bool get iAplicaciones {
     return _iAplicaciones;
+  }
+
+  set password(String nuevo) {
+    _password = nuevo;
+
+    notifyListeners();
+  }
+
+  set pregunta(String nueva) {
+    _pregunta = nueva;
+
+    notifyListeners();
+  }
+
+  set respuesta(String nueva) {
+    _respuesta = nueva;
+
+    notifyListeners();
   }
 
   set iTelefono(bool estatus) {
@@ -261,5 +286,17 @@ class Preferencias extends ChangeNotifier {
 
   get menuHorizontal {
     return _menuHorizontal;
+  }
+
+  String get password {
+    return _password;
+  }
+
+  String get pregunta {
+    return _pregunta;
+  }
+
+  String get respuesta {
+    return _respuesta;
   }
 }

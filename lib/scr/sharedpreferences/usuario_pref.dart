@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPref {
+class SharedPref extends ChangeNotifier {
   static final SharedPref _instancia = new SharedPref._internal();
   factory SharedPref() {
     return _instancia;
@@ -24,6 +24,9 @@ class SharedPref {
   static bool _menuHorizontal = true;
   static String _paleta = "2";
   static String _telefonoEmergencia = "";
+  static String _password = "";
+  static String _pregunta = "";
+  static String _respuesta = "";
   static bool _instalado = false;
   static bool _modoConfig = true;
   //static Color _backgroundColor = Color.fromARGB(255, 117, 149, 133);
@@ -57,6 +60,9 @@ class SharedPref {
     _menuHorizontal = true;
     paleta = "2";
     telefonoEmergencia = "";
+    password = "";
+    pregunta = "";
+    respuesta = "";
 
     ///instalado = false;
     _modoConfig = true;
@@ -86,6 +92,23 @@ class SharedPref {
     return _paleta;
   }
 
+  String get password {
+    _password = _pref.getString('password') ?? '';
+
+    return _password;
+  }
+
+  String get pregunta {
+    _pregunta = _pref.getString('pregunta') ?? '';
+
+    return _pregunta;
+  }
+
+  String get respuesta {
+    _respuesta = _pref.getString('respuesta') ?? '';
+
+    return _respuesta;
+  }
   // Color get backgroundColor {
   //   return _backgroundColor;
   // }
@@ -120,11 +143,26 @@ class SharedPref {
     //notifyListeners();
   }
 
+  set password(String nuevaClave) {
+    _password = nuevaClave;
+    _pref.setString('password', nuevaClave);
+  }
+
+  set pregunta(String nuevaPregunta) {
+    _pregunta = nuevaPregunta;
+    _pref.setString('pregunta', nuevaPregunta);
+  }
+
+  set respuesta(String nuevaRespuesta) {
+    _respuesta = nuevaRespuesta;
+    _pref.setString('respuesta', nuevaRespuesta);
+  }
+
   set iGoogle(bool estatus) {
     _iGoogle = estatus;
     _pref.setBool('google', estatus);
 
-    // notifyListeners();
+    //  notifyListeners();
   }
 
   bool get iGoogle {

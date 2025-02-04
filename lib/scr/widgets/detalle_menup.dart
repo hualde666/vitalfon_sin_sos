@@ -22,7 +22,7 @@ Future<List<Widget>> detalle(BuildContext context, bool configurar) async {
   if (configurar) {
     listaOpciones.addAll(listaOpciones2(context));
   }
-  if (pref.iGoogle && !configurar) {
+  if (SharedPref().iGoogle && !configurar) {
     final Application? apiGoogle =
         await apiProvider.obtenerApi('com.google.android.googlequicksearchbox');
     if (apiGoogle != null) {

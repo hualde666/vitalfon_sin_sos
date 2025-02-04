@@ -2,21 +2,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import 'package:piproy/scr/pages/api_grupos.dart';
 import 'package:piproy/scr/pages/ayuda_nueva.dart';
 import 'package:piproy/scr/pages/config_home.dart';
 import 'package:piproy/scr/pages/conta_grupos.dart';
+import 'package:piproy/scr/pages/desbloqueo.dart';
 
 import 'package:piproy/scr/pages/inicialza_vitalfon.dart';
 
 //import 'package:piproy/scr/pages/opciones_page.dart';
 import 'package:piproy/scr/pages/paletta_colores.dart';
+import 'package:piproy/scr/pages/password.dart';
 
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 
 import 'package:piproy/scr/widgets/header_app.dart';
-import 'package:provider/provider.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -113,6 +115,82 @@ class ConfiguracionPage extends StatelessWidget {
             texto: 'Color de vitalfon',
             onPress: PaletaPage(),
           ),
+
+          Divider(
+            height: 10,
+            color: Theme.of(context).primaryColor,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.key,
+              size: 40.0,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text('Clave bloqueo',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Theme.of(context).primaryColor,
+                )),
+            onTap: () {
+              if (pref.password != "") {
+                // pedir password.. lo tiene?
+                // mostra en password los datos actuales para modificar
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Desbloqueo(
+                              desbloqueo: false,
+                            )));
+                //
+                // no lo tiene ? hacer pregunta de seguridad
+              } else {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Password()));
+              }
+            },
+          ),
+
+          Divider(
+            height: 10,
+            color: Theme.of(context).primaryColor,
+          ),
+          ListTile(
+            leading: Icon(
+              pref.modoConfig ? Icons.lock_open : Icons.lock_outline,
+              size: 40.0,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+                pref.modoConfig
+                    ? 'Bloquear Configuración'
+                    : 'Desbloquear Configuración',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Theme.of(context).primaryColor,
+                )),
+            onTap: () {
+              final pref = Provider.of<Preferencias>(context, listen: false);
+
+              /// preguntar si ten con password
+              if (pref.password != "" && !pref.modoConfig) {
+                // final claveForm = Provider.of<ClaveFormProvider>(context);
+                // pedir password
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Desbloqueo(
+                              desbloqueo: true,
+                            )));
+
+                // pedirPassword(context,claveForm, true);
+              } else {
+                /// si no hay pasword
+                pref.modoConfig = !pref.modoConfig;
+                SharedPref().modoConfig = pref.modoConfig;
+              }
+            },
+          ),
           Divider(
             height: 10,
             color: Theme.of(context).primaryColor,
@@ -166,45 +244,6 @@ class ConfiguracionPage extends StatelessWidget {
                 // }
               } // paginaWep,
               ),
-          // Divider(
-          //   height: 10,
-          //   color: Theme.of(context).primaryColor,
-          // ),
-          // ItemConfig(
-          //   icon: Icons.play_circle,
-          //   texto: 'Video Presentacion',
-          //   onPress: VideoPlayerScreen(),
-          // ),
-          Divider(
-            height: 10,
-            color: Theme.of(context).primaryColor,
-          ),
-          ListTile(
-            leading: Icon(
-              pref.modoConfig ? Icons.lock_open : Icons.lock_outline,
-              size: 40.0,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: Text(
-                pref.modoConfig
-                    ? 'Bloquear Configuración'
-                    : 'Desbloquear Configuración',
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Theme.of(context).primaryColor,
-                )),
-            onTap: () {
-              // if (pref.modoConfig) {
-              final pref = Provider.of<Preferencias>(context, listen: false);
-              pref.modoConfig = !pref.modoConfig;
-              SharedPref().modoConfig = pref.modoConfig;
-              // onPress();
-              // } else {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (context) => Desbloqueo()));
-              // }
-            },
-          ),
           Divider(
             height: 10,
             color: Theme.of(context).primaryColor,
@@ -340,6 +379,77 @@ salida(BuildContext context) {
                     Navigator.pop(context);
                   },
                   child: Text('No',
+                      style: TextStyle(fontSize: 25.0, color: Colors.white)))
+            ],
+          ));
+}
+
+Future pedirPassword(BuildContext context, bool desbloqueo) {
+  final pref = Provider.of<Preferencias>(context, listen: false);
+
+  ///final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // validoPassword() {
+  //   final FormState? form = _formKey.currentState;
+
+  //   if (form!.validate()) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+            //backgroundColor: Colors.red[900],
+            title: Container(
+              height: 100,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: Form(
+                child: TextFormField(
+                  //key: _formKey, //claveForm.formKey,
+                  // textCapitalization: TextCapitalization.words,
+                  obscureText: true,
+                  style: TextStyle(
+                      fontSize: 40, color: Theme.of(context).primaryColor),
+                  //    controller: _tipoControle,
+                  validator: (valor) {
+                    return valor!.trim() != pref.password
+                        ? "Clave incorrecta"
+                        : null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "INGRESA LA CLAVE",
+                    labelText: 'Clave',
+                  ),
+                ),
+              ),
+            ),
+
+            //shape: CircleBorder(),
+            elevation: 14.0,
+            //actionsPadding: EdgeInsets.symmetric(horizontal: 15.0),
+            actionsAlignment: MainAxisAlignment.spaceAround,
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  // se sale con flecha menu inferior
+                  // if (claveForm.isValidForm()) {
+                  //   if (desbloqueo) {
+                  //     pref.modoConfig = !pref.modoConfig;
+                  //     Navigator.pop(context);
+                  //   }
+                  //  }
+                },
+                child: Text('Aceptar',
+                    style: TextStyle(fontSize: 25.0, color: Colors.white)),
+              ),
+              ElevatedButton(
+                  autofocus: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancelar',
                       style: TextStyle(fontSize: 25.0, color: Colors.white)))
             ],
           ));

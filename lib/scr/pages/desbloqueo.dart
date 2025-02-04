@@ -26,146 +26,148 @@ class Desbloqueo extends StatelessWidget {
     final pref = Provider.of<Preferencias>(context);
 
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: 60, left: 20, right: 20),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Container(
-            // height: height <= 500 ? 10 : 60,
-            child: Text('Autorizado',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            height: 340,
-            decoration: BoxDecoration(
-                color: pref.backgroundColor,
-                borderRadius: BorderRadius.circular(60.0)),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.always,
-                  child: Container(
-                    height: 300,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 100,
-                          color: pref.backgroundColor,
-                          margin: EdgeInsets.symmetric(horizontal: 40),
-                          child: TextFormField(
-                            // textCapitalization: TextCapitalization.words,
-                            obscureText: true,
-                            style: TextStyle(
-                                fontSize: 40,
-                                color: Theme.of(context).primaryColor),
-                            //    controller: _tipoControle,
-                            validator: (valor) {
-                              return valor!.trim() != pref.password
-                                  ? "Clave incorrecta"
-                                  : null;
-                            },
-                            decoration: InputDecorations.claveInputDecoration(
-                              context: context,
-                              hintText: "INGRESA LA CLAVE",
-                              labelText: 'Clave',
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 60, left: 20, right: 20),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              // height: height <= 500 ? 10 : 60,
+              child: Text('Autorizado',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Theme.of(context).primaryColor,
+                  )),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              height: 340,
+              decoration: BoxDecoration(
+                  color: pref.backgroundColor,
+                  borderRadius: BorderRadius.circular(60.0)),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Form(
+                    key: _formKey,
+                    autovalidateMode: AutovalidateMode.always,
+                    child: Container(
+                      height: 300,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 100,
+                            color: pref.backgroundColor,
+                            margin: EdgeInsets.symmetric(horizontal: 40),
+                            child: TextFormField(
+                              // textCapitalization: TextCapitalization.words,
+                              obscureText: true,
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  color: Theme.of(context).primaryColor),
+                              //    controller: _tipoControle,
+                              validator: (valor) {
+                                return valor!.trim() != pref.password
+                                    ? "Clave incorrecta"
+                                    : null;
+                              },
+                              decoration: InputDecorations.claveInputDecoration(
+                                context: context,
+                                hintText: "INGRESA LA CLAVE",
+                                labelText: 'Clave',
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PreguntaSeguridad()));
-                            },
-                            child: Text(
-                              'Olvidó su Clave ?',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color: Theme.of(context).primaryColor),
-                            )),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: 50,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      //change width and height on your need width = 200 and height = 50
-                                      //  minimumSize: Size(40, 20),
-                                      backgroundColor:
-                                          Color.fromRGBO(249, 75, 11, 1)),
-                                  onPressed: () {
-                                    if (validaPasword()) {
-                                      if (desbloqueo) {
-                                        final pref = Provider.of<Preferencias>(
-                                            context,
-                                            listen: false);
-                                        pref.modoConfig = !pref.modoConfig;
-                                        SharedPref().modoConfig =
-                                            pref.modoConfig;
-                                        Navigator.of(context).pop();
-                                      } else {
-                                        /// vengo de password
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Password()));
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PreguntaSeguridad()));
+                              },
+                              child: Text(
+                                'Olvidó su Clave ?',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Theme.of(context).primaryColor),
+                              )),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: 50,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        //change width and height on your need width = 200 and height = 50
+                                        //  minimumSize: Size(40, 20),
+                                        backgroundColor:
+                                            Color.fromRGBO(249, 75, 11, 1)),
+                                    onPressed: () {
+                                      if (validaPasword()) {
+                                        if (desbloqueo) {
+                                          final pref =
+                                              Provider.of<Preferencias>(context,
+                                                  listen: false);
+                                          pref.modoConfig = !pref.modoConfig;
+                                          SharedPref().modoConfig =
+                                              pref.modoConfig;
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          /// vengo de password
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Password()));
+                                        }
                                       }
-                                    }
-                                  },
-                                  child: Text(
-                                    'Aceptar',
-                                    style: TextStyle(
-                                        fontSize: height <= 500 ? 15 : 25,
-                                        color: Colors.white),
-                                  )),
-                            ),
-                            Container(
-                              height: 50,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      //change width and height on your need width = 200 and height = 50
-                                      //minimumSize: Size(40, 20),
-                                      backgroundColor:
-                                          Color.fromRGBO(249, 75, 11, 1)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(
-                                    'Cancelar',
-                                    style: TextStyle(
-                                        fontSize: height <= 500 ? 15 : 25,
-                                        color: Colors.white),
-                                  )),
-                            ),
-                          ],
-                        )
-                      ],
+                                    },
+                                    child: Text(
+                                      'Aceptar',
+                                      style: TextStyle(
+                                          fontSize: height <= 500 ? 15 : 25,
+                                          color: Colors.white),
+                                    )),
+                              ),
+                              Container(
+                                height: 50,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        //change width and height on your need width = 200 and height = 50
+                                        //minimumSize: Size(40, 20),
+                                        backgroundColor:
+                                            Color.fromRGBO(249, 75, 11, 1)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Cancelar',
+                                      style: TextStyle(
+                                          fontSize: height <= 500 ? 15 : 25,
+                                          color: Colors.white),
+                                    )),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

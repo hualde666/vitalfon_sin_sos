@@ -103,6 +103,8 @@ class IconOpcion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pref = Provider.of<Preferencias>(context);
+    final colorIcon =
+        pref.paleta == "2" ? Colors.white : Theme.of(context).primaryColor;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -113,20 +115,16 @@ class IconOpcion extends StatelessWidget {
             decoration: BoxDecoration(
                 color: activo
                     ? pref.backgroundColor
-                    : pref.backgroundColor.withOpacity(0.4),
+                    : pref.backgroundColor.withAlpha(120),
                 borderRadius: BorderRadius.circular(80),
                 border: Border.all(
                     color: activo
                         ? Theme.of(context).primaryColor
-                        : Theme.of(context).primaryColor.withOpacity(0.4),
-                    width: 2.0)),
-            child: Icon(
-              iconop,
-              size: 40.0,
-              color: activo
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).primaryColor.withOpacity(0.4),
-            ),
+                        : Theme.of(context).primaryColor.withAlpha(120))),
+            child: Icon(iconop,
+                size: 40.0, color: activo ? colorIcon : colorIcon.withAlpha(120)
+                // color: activo ? color : color.withAlpha(120),
+                ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 5),
@@ -134,7 +132,7 @@ class IconOpcion extends StatelessWidget {
                 style: TextStyle(
                     color: activo
                         ? Theme.of(context).primaryColor
-                        : Theme.of(context).primaryColor.withOpacity(0.4),
+                        : Theme.of(context).primaryColor.withAlpha(120),
                     fontSize: 20) //,Colors.white60),
                 ),
           ),
@@ -157,7 +155,7 @@ class GoogleOpcion extends StatelessWidget {
       decoration: BoxDecoration(
           color: SharedPref().iGoogle
               ? Colors.white
-              : Theme.of(context).primaryColor.withOpacity(0.4),
+              : Theme.of(context).primaryColor.withAlpha(50),
           borderRadius: BorderRadius.circular(60.0),
           border: Border.all(
               color: Colors.black26, // Theme.of(context).primaryColor,
@@ -177,9 +175,8 @@ class GoogleOpcion extends StatelessWidget {
                         'Google',
                         style: TextStyle(
                             fontSize: 35,
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.4)),
+                            color:
+                                Theme.of(context).primaryColor.withAlpha(50)),
                       )),
             height: 40,
             width: 195,
@@ -217,7 +214,7 @@ class OpcionOnOff extends StatelessWidget {
       decoration: BoxDecoration(
           color: onoff
               ? pref.backgroundColor
-              : pref.backgroundColor.withOpacity(0.5),
+              : pref.backgroundColor.withAlpha(120),
           // color:
           //     /** es un contacto o grupo de contacto */
           //     Colors.green,
@@ -225,15 +222,15 @@ class OpcionOnOff extends StatelessWidget {
           border: Border.all(
             color: onoff
                 ? Theme.of(context).primaryColor
-                : Theme.of(context).primaryColor.withOpacity(0.4),
+                : Theme.of(context).primaryColor.withAlpha(120),
           )),
       child: Center(
         child: Text(
           texto,
           style: TextStyle(
-            color: onoff
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).primaryColor.withOpacity(0.4),
+            // color: onoff
+            //     ? Theme.of(context).primaryColor
+            //     : Theme.of(context).primaryColor.withOpacity(0.4),
             fontSize: 40,
           ),
         ),

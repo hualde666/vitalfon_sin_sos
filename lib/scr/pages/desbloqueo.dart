@@ -32,10 +32,10 @@ class Desbloqueo extends StatelessWidget {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
               // height: height <= 500 ? 10 : 60,
-              child: Text('Autorizado',
+              child: Text('Autorizar',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 40,
                     color: Theme.of(context).primaryColor,
                   )),
             ),
@@ -95,7 +95,7 @@ class Desbloqueo extends StatelessWidget {
                               child: Text(
                                 'Olvidó su Clave ?',
                                 style: TextStyle(
-                                    fontSize: 30,
+                                    fontSize: 20,
                                     color: Theme.of(context).primaryColor),
                               )),
                           SizedBox(

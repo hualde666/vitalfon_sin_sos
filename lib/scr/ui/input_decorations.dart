@@ -19,7 +19,7 @@ class InputDecorations {
         labelText: labelText,
         labelStyle: TextStyle(
           fontSize: 30,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).primaryColor.withAlpha(150),
         ),
         hintStyle: TextStyle(
             fontSize: 20,

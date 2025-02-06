@@ -34,7 +34,7 @@ class PreguntaSeguridad extends StatelessWidget {
                 child: Text('Pregunta de Seguridad',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 40,
                       color: Theme.of(context).primaryColor,
                     )),
               ),

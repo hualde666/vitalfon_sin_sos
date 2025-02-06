@@ -288,7 +288,7 @@ class _ContactoState extends State<Contacto> {
                 estaSeleccionado //widget.apiProvider.categoryContact[widget.grupo]!
                     // .contains(widget.contactoSelec)
                     ? pref.backgroundColor
-                    : pref.backgroundColor.withOpacity(0.3), //Colors.grey[700],
+                    : pref.backgroundColor.withAlpha(150), //Colors.grey[700],
             borderRadius: BorderRadius.circular(60.0),
             border: Border.all(color: Theme.of(context).primaryColor)),
         child: Row(
@@ -311,7 +311,7 @@ class _ContactoState extends State<Contacto> {
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context)
                                       .primaryColor
-                                      .withOpacity(0.3),
+                                      .withAlpha(120),
                               fontSize: 30))),
                   Center(
                       child: Text(widget.contactoSelec.telefono,
@@ -321,7 +321,7 @@ class _ContactoState extends State<Contacto> {
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context)
                                       .primaryColor
-                                      .withOpacity(0.3),
+                                      .withAlpha(120),
                               fontSize: 25)))
                 ],
               ),

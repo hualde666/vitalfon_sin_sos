@@ -112,57 +112,24 @@ class ElementoApi extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // SizedBox(
-            //   height: 5,
-            // ),
-            configurar
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          //if (grupo != 'Todas') {
-                          agregaMPB(context, api);
-                          //}
-                        },
-                        child: Container(
-                          //  color: Colors.yellow,
-                          width: 50,
-                          height: 50,
-                          child: Center(
-                            child: Icon(
-                              Icons.arrow_back,
-                              size: 40,
-                              color: Color.fromARGB(255, 228, 220, 57),
-                            ),
-                          ),
+            configurar && grupo == 'Todas'
+                ? GestureDetector(
+                    onTap: () {
+                      //if (grupo != 'Todas') {
+                      agregaMPB(context, api);
+                      //}
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 40,
+                          color: Color.fromARGB(255, 228, 220, 57),
                         ),
                       ),
-                      grupo != 'Todas'
-                          ? SizedBox(
-                              width: 50,
-                            )
-                          : Container(),
-                      GestureDetector(
-                        onTap: () {
-                          if (grupo != 'Todas') {
-                            eliminarApi(context, grupo);
-                          }
-                        },
-                        child: grupo != 'Todas' && configurar
-                            ? Container(
-                                width: 50,
-                                height: 50,
-                                child: Center(
-                                  child: Icon(
-                                    Icons.close,
-                                    size: 40,
-                                    color: Colors.red,
-                                  ),
-                                ))
-                            : Container(),
-                      )
-                    ],
+                    ),
                   )
                 : Container(),
             Image.memory(
@@ -177,9 +144,6 @@ class ElementoApi extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  // color: pref.paleta == '2' || pref.paleta == '5'
-                  //     ? Colors.black
-                  //     : Colors.white,
                   fontSize: pref.modoConfig ? 20 : 30,
                 )),
             SizedBox(

@@ -81,13 +81,11 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
           ///
           return List.generate(
               lista.length,
-              (i) =>
-                  // (grupo != 'Todos')
-                  //     ?
-                  TarjetaContacto2(context, lista[i], true && pref.modoConfig,
-                      true && widget.configurar, 'MPA3 Todas'));
-          // : TarjetaContacto2(context, lista[i], true && pref.modoConfig,
-          //     false, 'MPA3 Todas'));
+              (i) => (grupo != 'Todos')
+                  ? TarjetaContacto2(
+                      context, lista[i], false, widget.configurar, 'MPA3 Todas')
+                  : TarjetaContacto2(context, lista[i], widget.configurar,
+                      widget.configurar, 'MPA3 Todas'));
         }
       }
       return [];
@@ -177,13 +175,7 @@ class _ContactsPorGrupoPageState extends State<ContactsPorGrupoPage> {
         child: Container(
           height: alto,
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // SizedBox(
-              //   height: 5,
-              // ),
-              //   tresBotonesHeader(context, true, 'ContactosPorGrupo'
-              // si  BOTON ROJO
               tresBotonesHeader(context, false, 'ContactosPorGrupo'),
               SizedBox(
                 height: 5,

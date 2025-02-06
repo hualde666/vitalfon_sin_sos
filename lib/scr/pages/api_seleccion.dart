@@ -127,30 +127,6 @@ class ApiSeleccionPage extends StatelessWidget {
       ),
     );
   }
-
-  // cambiarListas() {
-  //   final apiProvider = Provider.of<AplicacionesProvider>(context);
-  //   final tipo = apiProvider.tipoSeleccion;
-  //   //final listaVieja = apiProvider.categoryApi[tipo];
-  //   for (var i = 0; i < listaVieja.length; i++) {
-  //     if (!listaNueva.contains(listaVieja[i])) {
-  //       // eliminar
-  //       Provider.of<AplicacionesProvider>(context, listen: true)
-  //           .modiApiListaPorTipo(listaVieja[i]);
-  //       DbTiposAplicaciones.db.deleteApi(tipo, listaVieja[i].packageName);
-  //     }
-  //   }
-  //   for (var i = 0; i < listaNueva.length; i++) {
-  //     if (!listaVieja.contains(listaNueva[i])) {
-  //       // agregar
-  //       Provider.of<AplicacionesProvider>(context, listen: true)
-  //           .modiApiListaPorTipo(listaNueva[i]);
-  //       final nuevo = new ApiTipos(
-  //           grupo: grupo, tipo: tipo, nombre: listaNueva[i].packageName);
-  //       DbTiposAplicaciones.db.nuevoTipo(nuevo);
-  //     }
-  //   }
-  // }
 }
 
 class WidgetApi extends StatefulWidget {
@@ -177,11 +153,6 @@ class _WidgetApiState extends State<WidgetApi> {
     return GestureDetector(
       onTap: () {
         if (widget.api.packageName != "") {
-          /// agregar o eliminar api
-          ///
-          // Provider.of<AplicacionesProvider>(context, listen: false)
-          //    .modiApiListaPorTipo(api);
-
           if (widget.listaNueva.contains(widget.api)) {
             widget.listaNueva.remove(widget.api);
           } else {
@@ -191,8 +162,6 @@ class _WidgetApiState extends State<WidgetApi> {
         }
       },
       child: Container(
-        // width: 120,
-        // height: 50,
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         decoration: BoxDecoration(
             color: color,
@@ -218,9 +187,6 @@ class _WidgetApiState extends State<WidgetApi> {
                 widget.api.appName,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  // color: pref.paleta == '2' || pref.paleta == '5'
-                  //     ? Colors.black
-                  //     : Colors.white,
                   fontSize: 20,
                 ),
               ),

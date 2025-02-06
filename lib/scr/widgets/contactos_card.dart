@@ -78,7 +78,7 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          pref.modoConfig && widget.eliminar
+                          pref.modoConfig && (widget.envio || widget.eliminar)
                               ? _configurarContacto(
                                   context,
                                   widget.contacto,
@@ -143,7 +143,7 @@ Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        envio
+        grupo == 'Todos' && envio
             ? GestureDetector(
                 onTap: () {
                   agregarMPA(context, contacto);
@@ -175,7 +175,7 @@ Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
                 eliminarContactoGrupo(context, grupo, contacto);
               }
             },
-            child: eliminar && pref.modoConfig
+            child: grupo != 'Todos' && eliminar
                 ? Container(
                     width: 50,
                     height: 50,

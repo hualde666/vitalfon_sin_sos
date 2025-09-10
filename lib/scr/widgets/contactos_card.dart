@@ -135,7 +135,7 @@ class _TarjetaContacto2 extends State<TarjetaContacto2> {
 
 Widget _configurarContacto(BuildContext context, ContactoDatos contacto,
     String grupo, bool envio, bool eliminar, String tipo) {
-  final pref = Provider.of<Preferencias>(context);
+  //final pref = Provider.of<Preferencias>(context);
 
   return Container(
     padding: EdgeInsets.only(left: 10, right: 10),

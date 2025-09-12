@@ -1,15 +1,19 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:device_apps/device_apps.dart';
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
+
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/db_provider.dart';
 
 import 'package:provider/provider.dart';
 
-Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
+Widget elementoApi2(BuildContext context, AppInfo api, bool eliminar) {
+  final Uint8List? icon = api.icon;
   return GestureDetector(
     onTap: () {
       if (api.packageName != "" && !eliminar) {
-        api.openApp();
+        InstalledApps.startApp(api.packageName);
       }
     },
     // child: Container(
@@ -20,7 +24,7 @@ Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
       children: [
         GestureDetector(
           onTap: () {
-            eliminarApiMP(context, 'MPD' + api.packageName, api.appName);
+            eliminarApiMP(context, 'MPD' + api.packageName, api.name);
           },
           child: eliminar
               ? Container(
@@ -37,8 +41,9 @@ Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
                   ))
               : Container(),
         ),
+        // TODO mostrar imagen icon app
         Image.memory(
-          (api as ApplicationWithIcon).icon,
+          icon!,
           width: eliminar ? 80 : 120,
         ),
         Container(
@@ -46,7 +51,7 @@ Widget elementoApi2(BuildContext context, Application api, bool eliminar) {
           width: 130,
           // color: Colors.pink,
           child: Text(
-            api.appName,
+            api.name,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(

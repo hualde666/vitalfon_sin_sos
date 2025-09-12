@@ -1,6 +1,8 @@
-import 'package:device_apps/device_apps.dart';
+//import 'package:device_apps/device_apps.dart';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
 import 'package:piproy/scr/models/api_tipos.dart';
 import 'package:piproy/scr/pages/api_seleccion.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
@@ -22,7 +24,7 @@ class ApiPorGrupoPage extends StatelessWidget {
     final grupo = apiProvider.tipoSeleccion;
 
     Future<List<Widget>> cargarListaGrupo() async {
-      List<Application> lista = await apiProvider.obtenerListaApiGrupo(grupo);
+      List<AppInfo> lista = await apiProvider.obtenerListaApiGrupo(grupo);
 
       if (lista != []) {
         List<Widget> listaApi = List.generate(lista.length,
@@ -94,17 +96,18 @@ class ApiPorGrupoPage extends StatelessWidget {
 
 class ElementoApi extends StatelessWidget {
   ElementoApi({required this.api, required this.configurar});
-  final Application api;
+  final AppInfo api;
   final bool configurar;
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     final grupo = apiProvider.tipoSeleccion;
     final pref = Provider.of<Preferencias>(context);
+    final Uint8List? icon = api.icon;
     return GestureDetector(
       onTap: () {
         if (api.packageName != "") {
-          api.openApp();
+          InstalledApps.startApp(api.packageName);
         }
       },
       child: Container(
@@ -133,13 +136,17 @@ class ElementoApi extends StatelessWidget {
                   )
                 : Container(),
             Image.memory(
-              (api as ApplicationWithIcon).icon,
+              api.icon!,
               width: configurar ? 100 : 120,
             ),
+            // Image.memory(
+            //   (api as ApplicationWithIcon).icon,
+            //   width: configurar ? 100 : 120,
+            // ),
             SizedBox(
               height: 2,
             ),
-            Text(api.appName,
+            Text(api.name,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -158,7 +165,7 @@ class ElementoApi extends StatelessWidget {
   Future<dynamic> eliminarApi(BuildContext context, String tipo) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(' ${api.appName}',
+          title: Text(' ${api.name}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30,
@@ -202,7 +209,7 @@ class ElementoApi extends StatelessWidget {
           ],
         ),
       );
-  Future agregaMPB(BuildContext context, Application api) async {
+  Future agregaMPB(BuildContext context, AppInfo api) async {
     return await showDialog(
         context: context,
         builder: (context) {
@@ -210,17 +217,17 @@ class ElementoApi extends StatelessWidget {
         });
   }
 
-  AlertDialog agregaMpbForm(BuildContext context, Application api) {
+  AlertDialog agregaMpbForm(BuildContext context, AppInfo api) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     return AlertDialog(
       // title: Text('¿Desea crear acceso directo a ${api.appName}?'),
-      content: Text(
-          '¿Desea crear acceso directo a ${api.appName} en memu principal?',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 25,
-          )),
+      content:
+          Text('¿Desea crear acceso directo a ${api.name} en memu principal?',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+              )),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         Container(

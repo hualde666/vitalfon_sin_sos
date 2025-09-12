@@ -1,6 +1,5 @@
-import 'package:device_apps/device_apps.dart';
-
 import 'package:flutter/material.dart';
+import 'package:installed_apps/app_info.dart';
 import 'package:piproy/channel/channel_android.dart';
 
 import 'package:piproy/scr/funciones/url_funciones.dart';
@@ -10,7 +9,7 @@ import 'package:piproy/scr/pages/telefono_discado.dart';
 
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/contactos_provider.dart';
-
+import 'package:installed_apps/installed_apps.dart';
 import 'package:piproy/scr/providers/estado_celular.dart';
 import 'package:provider/provider.dart';
 
@@ -207,17 +206,19 @@ funcionIcon(BuildContext context, String tarea, bool prendida,
       final apiProvider =
           Provider.of<AplicacionesProvider>(context, listen: false);
       //  final listaApi = apiProvider.categoryApi['Todas'];
-      final Application? api =
+      final AppInfo? api =
           await apiProvider.obtenerApi('com.android.deskclock');
 
       if (api != null) {
-        api.openApp();
+        InstalledApps.startApp(api.packageName);
+        // api.openApp();
       } else {
-        final Application? api2 =
+        final AppInfo? api2 =
             await apiProvider.obtenerApi('com.sec.android.app.clockpackage');
         // ignore: unnecessary_null_comparison
         if (api2 != null) {
-          api2.openApp();
+          InstalledApps.startApp(api2.packageName);
+          // api2.openApp();
         }
       }
       break;

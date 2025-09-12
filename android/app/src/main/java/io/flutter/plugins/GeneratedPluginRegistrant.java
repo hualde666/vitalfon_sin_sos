@@ -18,17 +18,17 @@ public final class GeneratedPluginRegistrant {
     try {
       flutterEngine.getPlugins().add(new flutter.plugins.contactsservice.contactsservice.ContactsServicePlugin());
     } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin contacts_service, flutter.plugins.contactsservice.contactsservice.ContactsServicePlugin", e);
-    }
-    try {
-      flutterEngine.getPlugins().add(new fr.g123k.deviceapps.DeviceAppsPlugin());
-    } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin device_apps, fr.g123k.deviceapps.DeviceAppsPlugin", e);
+      Log.e(TAG, "Error registering plugin contacts_service_plus, flutter.plugins.contactsservice.contactsservice.ContactsServicePlugin", e);
     }
     try {
       flutterEngine.getPlugins().add(new com.yanisalfian.flutterphonedirectcaller.FlutterPhoneDirectCallerPlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin flutter_phone_direct_caller, com.yanisalfian.flutterphonedirectcaller.FlutterPhoneDirectCallerPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new com.sharmadhiraj.installed_apps.InstalledAppsPlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin installed_apps, com.sharmadhiraj.installed_apps.InstalledAppsPlugin", e);
     }
     try {
       flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());

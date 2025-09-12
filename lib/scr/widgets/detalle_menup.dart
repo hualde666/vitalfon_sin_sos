@@ -1,10 +1,12 @@
+//import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/index.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:piproy/scr/models/contactos_modelo.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/contactos_provider.dart';
 import 'package:piproy/scr/providers/provider_pref.dart';
-import 'package:device_apps/device_apps.dart';
+
 import 'package:piproy/scr/sharedpreferences/usuario_pref.dart';
 import 'package:piproy/scr/widgets/api_menup.dart';
 import 'package:piproy/scr/widgets/contactos_card.dart';
@@ -23,7 +25,7 @@ Future<List<Widget>> detalle(BuildContext context, bool configurar) async {
     listaOpciones.addAll(listaOpciones2(context));
   }
   if (SharedPref().iGoogle && !configurar) {
-    final Application? apiGoogle =
+    final AppInfo? apiGoogle =
         await apiProvider.obtenerApi('com.google.android.googlequicksearchbox');
     if (apiGoogle != null) {
       listaOpciones.add(googleBusqueda(context, apiGoogle));
@@ -161,13 +163,13 @@ Future<Widget> matrizApis(
   //********************* una Api   MPD            */
 
   final List<String> lista = [];
-  final List<Application> listaApis = [];
+  final List<AppInfo> listaApis = [];
   final List<Widget> listaApisWidget = [];
   lista.addAll(listaMenu.where((element) => element.contains('MPD')));
 
   for (var i = 0; i < lista.length; i++) {
-    final Application? api =
-        await DeviceApps.getApp(lista[i].substring(3), true);
+    final AppInfo? api =
+        await InstalledApps.getAppInfo(lista[i].substring(3), null);
 
     if (api != null) {
       listaApis.add(api);
@@ -177,7 +179,7 @@ Future<Widget> matrizApis(
   /********** ORDENAR ALFABETICAMENTE LAS APPS ***********/
 
   listaApis.sort((a, b) {
-    return a.appName.toLowerCase().compareTo(b.appName.toLowerCase());
+    return a.name.toLowerCase().compareTo(b.name.toLowerCase());
   });
   //****  GENERO  WIDGET DE LAS APP */
   for (var i = 0; i < listaApis.length; i++) {

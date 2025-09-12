@@ -1,6 +1,8 @@
-import 'package:contacts_service/contacts_service.dart';
-import 'package:device_apps/device_apps.dart';
-
+//import 'package:contacts_service/contacts_service.dart';
+import 'package:contacts_service_plus/contacts_service_plus.dart';
+import 'package:installed_apps/app_info.dart';
+//import 'package:device_apps/device_apps.dart';
+import 'package:installed_apps/installed_apps.dart';
 import 'package:flutter/material.dart';
 
 import 'package:piproy/scr/models/contactos_modelo.dart';
@@ -21,13 +23,13 @@ class AplicacionesProvider with ChangeNotifier {
 
   bool _cargando = true;
   String _tipoSeleccion = '';
-  late Application? vitalfonSOS;
+  late AppInfo? vitalfonSOS;
   // guarda nombres de grupos de api
   List<String> _apigrupos = [
     'Todas',
   ];
   // guarda apis por grupo
-  Map<String, List<Application>> categoryApi = {};
+  Map<String, List<AppInfo>> categoryApi = {};
 
   // guarda nombres de grupos de contactos
   List<String> _contactgrupos = [
@@ -218,11 +220,11 @@ class AplicacionesProvider with ChangeNotifier {
 
   //******************************* */
   // agrega  y elimina app en grupo
-  modiApiListaPorTipo(Application api) {
+  modiApiListaPorTipo(AppInfo api) {
     if (!categoryApi[_tipoSeleccion]!.contains(api)) {
       categoryApi[_tipoSeleccion]?.add(api);
       categoryApi[_tipoSeleccion]?.sort((a, b) {
-        return a.appName.toLowerCase().compareTo(b.appName.toLowerCase());
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
       });
     } else {
       categoryApi[_tipoSeleccion]?.remove(api);
@@ -253,10 +255,10 @@ class AplicacionesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Application?> obtenerApi(String nombre) async {
-    // Application api;
+  Future<AppInfo?> obtenerApi(String nombre) async {
+    AppInfo? api;
     if (nombre != '') {
-      Application? api = await DeviceApps.getApp(nombre, true);
+      api = await InstalledApps.getAppInfo(nombre, null);
       if (api != null) {
         return api;
       }
@@ -278,10 +280,10 @@ class AplicacionesProvider with ChangeNotifier {
     if (grupo == 'Todas') {
       // ******* obtengo Todas las app del celular */
       if (categoryApi['Todas']!.isEmpty) {
-        final resp1 = await DeviceApps.getInstalledApplications(
-            includeAppIcons: true,
-            includeSystemApps: true,
-            onlyAppsWithLaunchIntent: true);
+        final resp1 = await InstalledApps.getInstalledApps(
+            true,
+            true, // Para no cargar los íconos
+            "");
 
         categoryApi['Todas']?.addAll(resp1);
       }
@@ -292,7 +294,7 @@ class AplicacionesProvider with ChangeNotifier {
             await DbTiposAplicaciones.db.obtenerAppsGrupo(grupo);
         for (var i = 0; i < lista.length; i++) {
           if (lista[i].nombre != '') {
-            final api = await DeviceApps.getApp(lista[i].nombre, true);
+            final api = await InstalledApps.getAppInfo(lista[i].nombre, null);
 
             if (api != null) {
               if (!categoryApi[grupo]!.contains(api)) {
@@ -306,7 +308,7 @@ class AplicacionesProvider with ChangeNotifier {
 
     if (categoryApi[grupo] != null) {
       categoryApi[grupo]?.sort((a, b) {
-        return a.appName.toLowerCase().compareTo(b.appName.toLowerCase());
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
       });
       return categoryApi[grupo];
     }
@@ -417,7 +419,7 @@ class AplicacionesProvider with ChangeNotifier {
 
   //******************************* */
   // elimina API al menu principal
-  eliminar(Application api) {
+  eliminar(AppInfo api) {
     categoryApi[_tipoSeleccion]!.remove(api);
     notifyListeners();
   }

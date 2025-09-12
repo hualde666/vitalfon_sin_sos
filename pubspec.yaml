@@ -24,10 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
   collection: ^1.18.0
-  contacts_service: ^0.6.3
- # cupertino_icons: ^1.0.6
-  device_apps: ^2.2.0
+ # contacts_service: ^0.6.3
 
+   # cupertino_icons: ^1.0.6
+  #device_apps: ^2.2.0
+ 
   flutter_phone_direct_caller: ^2.1.0
   #no fuciona kotlin mayor a 1.9.0
   #flutter_sms: ^2.3.3
@@ -37,11 +38,13 @@ dependencies:
   # geolocator: ^11.0.0
   #location: ^5.0.3
   path_provider: ^2.0.2
-  permission_handler: ^11.3.1
+  permission_handler: ^12.0.1
   provider: ^6.1.2
   shared_preferences: ^2.2.2
   sqflite: ^2.3.2
   url_launcher: ^6.2.5
+  contacts_service_plus: 0.0.2
+  installed_apps: ^1.6.0
 #  video_player: null
 # dependency_overrides:
 #   quiver: ^3.0.0

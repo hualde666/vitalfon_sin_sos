@@ -1,6 +1,6 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
-
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
 import 'package:piproy/scr/models/api_tipos.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/db_provider.dart';
@@ -15,26 +15,25 @@ class ApiSeleccionPage extends StatelessWidget {
 
   final String grupo;
 
-  final List<Application> listaNueva = [];
+  final List<AppInfo> listaNueva = [];
 
   @override
   Widget build(BuildContext context) {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     final grupo = apiProvider.tipoSeleccion;
-    List<Application> listaNueva = [];
-    List<Application>? listaVieja = [];
-    List<Application> listaTodas = [];
+    List<AppInfo> listaNueva = [];
+    List<AppInfo>? listaVieja = [];
+    List<AppInfo> listaTodas = [];
 
     Future<List<Widget>> cargarListaGrupo() async {
-      List<Application> lista = await apiProvider.obtenerListaApiGrupo(grupo);
+      List<AppInfo> lista = await apiProvider.obtenerListaApiGrupo(grupo);
 
       if (lista != []) {
         listaVieja.addAll(lista);
 
         listaNueva.addAll(listaVieja);
       }
-      List<Application> lista2 =
-          await apiProvider.obtenerListaApiGrupo('Todas');
+      List<AppInfo> lista2 = await apiProvider.obtenerListaApiGrupo('Todas');
       if (lista2 != []) {
         if (listaTodas.isEmpty) {
           listaTodas.addAll(lista2);
@@ -136,9 +135,9 @@ class WidgetApi extends StatefulWidget {
     required this.api,
   });
 
-  final List<Application> listaNueva;
+  final List<AppInfo> listaNueva;
   final BuildContext context;
-  final Application api;
+  final AppInfo api;
 
   @override
   State<WidgetApi> createState() => _WidgetApiState();
@@ -173,10 +172,10 @@ class _WidgetApiState extends State<WidgetApi> {
             SizedBox(
               height: 5,
             ),
-            Image.memory(
-              (widget.api as ApplicationWithIcon).icon,
-              width: 90,
-            ),
+            // Image.memory(
+            //   (widget.api as ApplicationWithIcon).icon,
+            //   width: 90,
+            // ),
             SizedBox(
               width: 10,
             ),
@@ -184,7 +183,7 @@ class _WidgetApiState extends State<WidgetApi> {
               height: 50,
               width: 150,
               child: Text(
-                widget.api.appName,
+                widget.api.name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,

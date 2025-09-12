@@ -1,4 +1,6 @@
-import 'package:device_apps/device_apps.dart';
+//import 'package:device_apps/device_apps.dart';
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -30,14 +32,16 @@ llamar(String telefono) async {
 
 mensaje(String phone) async {
   if (phone == '') {
-    Application? api = await DeviceApps.getApp('com.android.messaging', true);
+    AppInfo? api =
+        await InstalledApps.getAppInfo('com.android.messaging', null);
     // await DeviceApps.getApp('com.google.android.apps.messaging', true);
     if (api == null) {
       // api = await DeviceApps.getApp('com.android.messaging', true);
-      api = await DeviceApps.getApp('com.google.android.apps.messaging', true);
+      api = await InstalledApps.getAppInfo(
+          'com.google.android.apps.messaging', null);
     }
     if (api != null) {
-      api.openApp();
+      InstalledApps.startApp(api.packageName);
       return;
     }
   }

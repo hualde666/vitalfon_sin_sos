@@ -1,7 +1,8 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
 
-Widget googleBusqueda(BuildContext context, Application apiGoogle) {
+Widget googleBusqueda(BuildContext context, AppInfo apiGoogle) {
   return GestureDetector(
     child: Container(
         height: 60,
@@ -53,7 +54,8 @@ Widget googleBusqueda(BuildContext context, Application apiGoogle) {
     onTap: () {
       // await DeviceApps.getApp(listaMenu[i].substring(3), true);
 //if (api != null) {
-      apiGoogle.openApp();
+      InstalledApps.startApp(apiGoogle.packageName);
+      // apiGoogle.openApp();
       //    }
       //***abrirGoogle();
     },

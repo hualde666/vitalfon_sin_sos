@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:installed_apps/index.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 
 import 'package:piproy/scr/providers/estado_celular.dart';
@@ -15,7 +16,10 @@ Widget botonRojoHeader(BuildContext context, bool activo) {
       onTap: () {
         if (activoDatos) {
           if (activo) {
-            apiProvider.vitalfonSOS?.openApp();
+            // TODO ojo abre vitalfonSOS
+
+            InstalledApps.startApp('com.vitalfon.SOS');
+            // apiProvider.vitalfonSOS?.openApp();
             // Navigator.push(context,
             //     MaterialPageRoute(builder: (context) => BotonRojoPage()));
           }

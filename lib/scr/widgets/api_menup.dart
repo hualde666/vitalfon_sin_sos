@@ -41,7 +41,6 @@ Widget elementoApi2(BuildContext context, AppInfo api, bool eliminar) {
                   ))
               : Container(),
         ),
-        // TODO mostrar imagen icon app
         Image.memory(
           icon!,
           width: eliminar ? 80 : 120,

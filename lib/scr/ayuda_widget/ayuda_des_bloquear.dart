@@ -28,9 +28,6 @@ class AyudaDesBloquearPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 30,
-            ),
             Text('    BLOQUEAR:',
                 style: TextStyle(
                     fontSize: 23,

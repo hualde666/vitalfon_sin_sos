@@ -23,14 +23,15 @@ class AyudaConfigurarPage extends StatelessWidget {
     // lista.addAll(ayudaEncabezado(context, 'Configuración de vitalfon'));
     List<Widget> lista2 = [
       Container(
+        //color: Colors.amber,
         margin: EdgeInsets.only(left: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            //   SizedBox(
+            //     height: 30,
+            //   ),
             AyudaParrafo(
               texto:
                   '     En esta sección están disponibles todas las opciones para configurar el app de acuerdo a las necesidades del usuario final.',

@@ -28,9 +28,6 @@ class AyudaContactosSms extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 30,
-            ),
             AyudaParrafo(
               texto:
                   '     Elija aquí los destinatarios que recibirán el mensaje de emergencia; deberán ser seleccionados de los contactos incluídos en el teléfono.',

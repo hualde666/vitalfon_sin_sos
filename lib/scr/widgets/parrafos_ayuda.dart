@@ -14,7 +14,10 @@ class AyudaParrafo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //width: double.infinity,
-      margin: EdgeInsets.only(left: 20, right: 20, top: 3),
+      margin: EdgeInsets.only(
+        left: 20,
+        right: 20,
+      ),
       child: Text(texto,
           textAlign: TextAlign.justify,
           style: TextStyle(

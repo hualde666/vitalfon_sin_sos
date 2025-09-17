@@ -30,11 +30,11 @@ class AyudaIntroduccionPage extends StatelessWidget {
         margin: EdgeInsets.only(left: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            // SizedBox(
+            //   height: 30,
+            // ),
             AyudaParrafo(
               texto:
                   '     Vitalfon simplifica el uso del teléfono móvil o celular a usuarios con limitaciones visuales o digitales.',

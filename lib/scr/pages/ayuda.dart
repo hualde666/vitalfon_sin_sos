@@ -40,7 +40,7 @@ class Ayuda extends StatelessWidget {
               pagina,
               style: TextStyle(fontSize: 25, color: Colors.black54),
             ),
-            30.0,
+            33.0,
             true,
             pagina),
         backgroundColor: Colors.white,
@@ -50,12 +50,11 @@ class Ayuda extends StatelessWidget {
   }
 
   Widget contenido(String pagina) {
-    Widget ayuda = Center(
-        child: Container(
-            child: Text(
+    Widget ayuda = Container(
+        child: Text(
       pagina,
       style: TextStyle(color: Colors.red),
-    )));
+    ));
     switch (pagina) {
       case 'Introducción':
         ayuda = AyudaIntroduccionPage();
@@ -90,7 +89,7 @@ class Ayuda extends StatelessWidget {
       case 'Página Web':
         ayuda = AyudaPaginaWeBPage();
         break;
-      case 'Bloquear o Desbloquear Configuración':
+      case 'Des/Bloquear Configuración':
         ayuda = AyudaDesBloquearPage();
         break;
 

@@ -23,13 +23,13 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    // flutterVersionCode = '1'
+    flutterVersionCode = '1'
     //flutterVersionCode = '1'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    //flutterVersionName = '1.0'
+    flutterVersionName = '1.0'
     // flutterVersionName = '1.0'
 }
 // 13 03 2024
@@ -70,9 +70,9 @@ android {
         applicationId = "com.proy.vitalfon"
  
         minSdkVersion flutter.minSdkVersion
-       // targetSdkVersion 34  //pase 34 a 35 11 09 2025
+        targetSdkVersion 35  //pase 34 a 35 11 09 2025
        
-        versionCode = 54
+        versionCode = 56
         
         versionName = "1.0.1"
    // android.defaultConfig.ndk.debugSymbolLevel = 'SYMBOL_TABLE'

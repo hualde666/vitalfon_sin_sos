@@ -1,5 +1,3 @@
-//import 'package:device_apps/device_apps.dart';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
@@ -103,7 +101,7 @@ class ElementoApi extends StatelessWidget {
     final apiProvider = Provider.of<AplicacionesProvider>(context);
     final grupo = apiProvider.tipoSeleccion;
     final pref = Provider.of<Preferencias>(context);
-    final Uint8List? icon = api.icon;
+    // final Uint8List? icon = api.icon;
     return GestureDetector(
       onTap: () {
         if (api.packageName != "") {

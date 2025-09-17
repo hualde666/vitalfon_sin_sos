@@ -28,9 +28,6 @@ class AyudaContacsGrupos extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 30,
-            ),
             AyudaParrafo(
               texto:
                   '     En esta sección puede organizar sus contactos, para que aparezcan en la pantalla de inicio, de forma individual o en grupos.',
@@ -40,7 +37,7 @@ class AyudaContacsGrupos extends StatelessWidget {
             ),
             Text('    CONTACTOS INDIVIDUALES:',
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.black54,
                     fontSize: 23,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold)),
@@ -107,7 +104,7 @@ class AyudaContacsGrupos extends StatelessWidget {
             ),
             Text('    CONTACTOS EN GRUPOS:',
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.black54,
                     fontSize: 23,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold)),

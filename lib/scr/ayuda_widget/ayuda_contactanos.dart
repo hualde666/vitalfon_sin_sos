@@ -28,9 +28,6 @@ class AyudaContactanosPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 30,
-            ),
             AyudaParrafo(
               texto:
                   '    Aquí encontrará un mail donde podrá enviarnos sus comentarios y sugerencias.',

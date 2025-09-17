@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
-import 'package:installed_apps/installed_apps.dart';
+
 import 'package:piproy/scr/models/api_tipos.dart';
 import 'package:piproy/scr/providers/aplicaciones_provider.dart';
 import 'package:piproy/scr/providers/db_provider.dart';

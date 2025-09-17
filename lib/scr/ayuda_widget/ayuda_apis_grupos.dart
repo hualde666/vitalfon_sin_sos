@@ -27,9 +27,6 @@ class AyudaApisGrupos extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 30,
-            ),
             AyudaParrafo(
               texto:
                   '     En esta sección puede seleccionar las apps que quiera que aparezcan en la página de inicio, seleccionelas directamente del grupo "TODAS"',
@@ -46,6 +43,7 @@ class AyudaApisGrupos extends StatelessWidget {
             ),
             Text('    APP INDIVIDUALES:',
                 style: TextStyle(
+                    color: Colors.black54,
                     fontSize: 23,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold)),
@@ -68,6 +66,7 @@ class AyudaApisGrupos extends StatelessWidget {
             ),
             Text('    APPS  EN  GRUPOS:',
                 style: TextStyle(
+                    color: Colors.black54,
                     fontSize: 23,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold)),
